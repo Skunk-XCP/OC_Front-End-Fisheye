@@ -35,7 +35,33 @@ function photographerFactory(data) {
 
         return (article);
     }
-    return { name, id, city, country, tagline, price, picture, getUserCardDOM }
+
+    function getPhotographerDOM() {
+
+        const div = document.createElement( 'div' );
+        div.classList.add("infoPhotographer");
+
+        const profilPic = document.createElement( 'img' );
+        profilPic.setAttribute("src", picture);
+        profilPic.alt= `Photo de ${name}`;
+
+        const nameArtist = document.createElement( 'h2' );
+        nameArtist.textContent = name;
+
+        const living = document.createElement( 'p' );
+        living.textContent = `${city}, ${country}`;
+
+        const catchLine = document.createElement( 'p' );
+        catchLine.textContent = tagline;
+
+        div.appendChild(nameArtist);
+        div.appendChild(living);
+        div.appendChild(catchLine);
+
+        return {div, profilPic};
+    }
+
+    return { name, id, city, country, tagline, price, picture, getUserCardDOM, getPhotographerDOM }
 }
 
 export { photographerFactory };
