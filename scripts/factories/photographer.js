@@ -23,15 +23,15 @@ function photographerFactory(data) {
         const catchLine = document.createElement( 'p' );
         catchLine.textContent = tagline;
 
-        const payment = document.createElement( 'p' );
-        payment.textContent = `${price}€/jour`;
+        const pricing = document.createElement( 'p' );
+        pricing.textContent = `${price}€/jour`;
         
         article.appendChild(link);
         link.appendChild(profilPic);
         link.appendChild(nameArtist);
         article.appendChild(living);
         article.appendChild(catchLine);
-        article.appendChild(payment);
+        article.appendChild(pricing);
 
         return (article);
     }
