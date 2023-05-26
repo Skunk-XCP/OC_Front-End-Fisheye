@@ -6,8 +6,6 @@ const contactButton = document.querySelector('.contact_button');
 const contactModal = document.getElementById('contact_modal');
 const closeBtn = document.querySelector('.closeBtn');
 
-
-
 // Fonction pour afficher la modal
 function openModal() {
   contactModal.style.display = 'block';
@@ -19,7 +17,6 @@ function openModal() {
 function closeModal() {
   contactModal.style.display = 'none';
   contactButton.style.display = 'block'
-
 }
 
 // Ajouter un écouteur d'événement sur le bouton
@@ -27,20 +24,15 @@ contactButton.addEventListener('click', openModal);
 
 closeBtn.addEventListener('click', closeModal);
 
-// ajouter un setattribute dialog
-
-
-
 
 const formElement = document.querySelector('form');
-
 const divElement = document.createElement('div');
-
-
 
 
 const labels = ['Prénom', 'Nom'];
 
+// Boucle permettant de générer les labels et inputs de type text
+// à partir de la variable "labels"
 for (let i = 0 ; i < labels.length ; i++) {
     // Créer l'élément input
     const inputElement = document.createElement('input');
@@ -109,3 +101,35 @@ for (let i = 0 ; i < labels.length ; i++) {
     sendBtn.textContent = "Envoyer";
 
     divElement.appendChild(sendBtn);
+
+    // Initialisation de la variable d'envoi
+    let isSubmitted = false;
+
+    // Récupération des inputs à l'envoi du formulaire
+    formElement.addEventListener('submit', (e) => {
+
+      e.preventDefault();
+
+      let firstnameValue = document.getElementById('Prénom').value;
+      let lastnameValue = document.getElementById('Nom').value;
+      let emailValue = document.getElementById('email').value;
+      let messageValue = document.getElementById('message').value;
+     
+      console.log('Prénom:', firstnameValue);
+      console.log('Nom:', lastnameValue);
+      console.log('Email:', emailValue);
+      console.log('Message:', messageValue);
+
+      isSubmitted = true;
+
+    })
+
+    // Réinitialiser le form à la fermeture
+    function sendForm () {
+      if (isSubmitted) {
+        formElement.reset();
+        closeModal();
+      }
+    }
+
+    formElement.addEventListener('submit', sendForm);
