@@ -6,34 +6,18 @@ function photographerFactory(data) {
     function getUserCardDOM() {
         const article = document.createElement( 'article' );
         article.classList.add("photographer-card");
-        
-        const link = document.createElement( 'a' );
-        link.setAttribute("href", `photographer.html?id=${id}`);
+                
+        const photographerCard = `
+            <a href="photographer.html?id=${id}">
+            <img src="${picture}" alt="Photo de ${name}">
+            <h2>${name}</h2></a>
+            <p>${city}, ${country}</p>
+            <p>${tagline}</p>
+            <p>${price}</p>
+        `;
 
-        const profilPic = document.createElement( 'img' );
-        profilPic.setAttribute("src", picture)
-        profilPic.alt= `Photo de ${name}`;
-
-        const nameArtist = document.createElement( 'h2' );
-        nameArtist.textContent = name;
-
-        const living = document.createElement( 'p' );
-        living.textContent = `${city}, ${country}`;
-
-        const catchLine = document.createElement( 'p' );
-        catchLine.textContent = tagline;
-
-        const pricing = document.createElement( 'p' );
-        pricing.textContent = `${price}€/jour`;
-        
-        article.appendChild(link);
-        link.appendChild(profilPic);
-        link.appendChild(nameArtist);
-        article.appendChild(living);
-        article.appendChild(catchLine);
-        article.appendChild(pricing);
-
-        return (article);
+        article.innerHTML = photographerCard;
+        return article;
     }
 
     function getPhotographerDOM() {
@@ -41,24 +25,18 @@ function photographerFactory(data) {
         const div = document.createElement( 'div' );
         div.classList.add("infoPhotographer");
 
-        const profilPic = document.createElement( 'img' );
-        profilPic.setAttribute("src", picture);
-        profilPic.alt= `Photo de ${name}`;
+        const photographerHeader = `
+        <div class="photograph-header">
+            <h2>${name}</h2>
+            <p>${tagline}</p>
+            <p>${city}, ${country}</p>
+            <button class="contact_button modal_buttons">Contactez-moi</button>
+            <img src="${picture}" alt="Photo de ${name}">
+        </div>
+        `;
 
-        const nameArtist = document.createElement( 'h2' );
-        nameArtist.textContent = name;
-
-        const living = document.createElement( 'p' );
-        living.textContent = `${city}, ${country}`;
-
-        const catchLine = document.createElement( 'p' );
-        catchLine.textContent = tagline;
-
-        div.appendChild(nameArtist);
-        div.appendChild(living);
-        div.appendChild(catchLine);
-
-        return {div, profilPic};
+        div.innerHTML = photographerHeader;
+        return div;
     }
 
     return { name, id, city, country, tagline, price, picture, getUserCardDOM, getPhotographerDOM }

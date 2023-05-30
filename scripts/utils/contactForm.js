@@ -1,10 +1,11 @@
 import { photographerFactory } from "../factories/photographer.js";
 
-const main = document.querySelector('main');
+const main = document.getElementById('main');
 main.setAttribute("aria-hidden","false");
 const contactButton = document.querySelector('.contact_button');
 const contactModal = document.getElementById('contact_modal');
 const closeBtn = document.querySelector('.closeBtn');
+
 
 // Fonction pour afficher la modal
 function openModal() {

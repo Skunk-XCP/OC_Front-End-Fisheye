@@ -1,5 +1,5 @@
 import { photographerFactory } from "../factories/photographer.js"; 
-// import { mediaFactory } from "../factories/media.js";
+import { mediaFactory } from "../factories/media.js";
 
 // let mediaPhotographer = [];
 
@@ -14,40 +14,27 @@ const findPhotographer  = (photographers, id) => {
     return photographer;
 };
 
-// à corriger
+// Fonction qui affiche le header du photographe
+function headerPhotographer(photographer) {
+    const main = document.querySelector( '#main' );
+    const headerModel = photographerFactory(photographer);
+    const userCardHeader = headerModel.getPhotographerDOM();
+    main.appendChild(userCardHeader);
+
+};
+
+
+// Recherche des media
 // const findMediaPhotographer = (media, id) => {
 //     const mediaPhotographer = media.find(media => media.photographerId === id);
 //     return mediaPhotographer;
 // };
 
-// fonction qui affiche le header du photographe
-function headerPhotographer(photographer) {
-    const photographerHeader = document.querySelector( '.photograph-header' );
-
-    const nameArtist = document.createElement( 'h2' );
-    nameArtist.textContent = photographer.name;
-    
-    
-    const profilPic = document.createElement( 'img' );
-    profilPic.setAttribute("src", `../assets/photographers/${photographer.portrait}`);
-    profilPic.alt= `Photo de ${photographer.name}`;
-
-
-    const living = document.createElement( 'p' );
-    living.textContent = `${photographer.city}, ${photographer.country}`;
-
-    const catchLine = document.createElement( 'p' );
-    catchLine.textContent = photographer.tagline;
-
-    photographerHeader.appendChild(nameArtist);
-    photographerHeader.appendChild(living);
-    photographerHeader.appendChild(catchLine);
-    photographerHeader.appendChild(profilPic);
-
-};
+// Fonction qui affiche les media
 
 async function init() {
     const data = await dataPhotographer( '../../data/photographers.json' );
+
     // les accolades permettent de récupérer l'objet photographers
     const {photographers, media} = data;
 
@@ -60,13 +47,12 @@ async function init() {
     const artistName = document.querySelector('.nameArtist');
     artistName.textContent = photographer.name;
 
+    // Trouver la correspondance - commentaire à modifier
     // const mediaPhotographer = findMediaPhotographer(media, artistId);
-
-    // const photographerName = photographer.name;
-    // photographerName.textContent = photographer.name;
 
     // appelle la fonction headerPhotographer
     headerPhotographer(photographer);
+    // findMediaPhotographer(media, id);
 };
 
 init();
