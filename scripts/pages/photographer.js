@@ -9,6 +9,10 @@ async function dataPhotographer(file) {
     return data;
 };
 
+// Fonction qui va chercher dans le tableau photographers et exécute une fonction de
+// rappel sur chaque élément photographer.
+// La fonction de rappel vérifie si l'identifiant de l'élément correspond à 
+// l'identifiant fourni en paramètre.
 const findPhotographer  = (photographers, id) => {
     const photographer =  photographers.find(photographer => photographer.id === id);
     return photographer;

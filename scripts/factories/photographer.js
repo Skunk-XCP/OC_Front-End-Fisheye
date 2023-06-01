@@ -23,16 +23,14 @@ function photographerFactory(data) {
     function getPhotographerDOM() {
 
         const div = document.createElement( 'div' );
-        div.classList.add("infoPhotographer");
+        div.classList.add("photograph-header");
 
         const photographerHeader = `
-        <div class="photograph-header">
             <h2>${name}</h2>
             <p>${tagline}</p>
             <p>${city}, ${country}</p>
             <button class="contact_button modal_buttons">Contactez-moi</button>
             <img src="${picture}" alt="Photo de ${name}">
-        </div>
         `;
 
         div.innerHTML = photographerHeader;
