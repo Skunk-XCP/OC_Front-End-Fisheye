@@ -1,7 +1,7 @@
 import { photographerFactory } from "../factories/photographer.js"; 
 import { mediaFactory } from "../factories/media.js";
 
-// let mediaPhotographer = [];
+let mediaPhotographer = [];
 
 async function dataPhotographer(file) {
     const response = await fetch(file);
@@ -29,12 +29,21 @@ function headerPhotographer(photographer) {
 
 
 // Recherche des media
-// const findMediaPhotographer = (media, id) => {
-//     const mediaPhotographer = media.find(media => media.photographerId === id);
-//     return mediaPhotographer;
-// };
+const getMediaPhotographer = (media, id) => {
+    const mediaByPhotographer = media.filter(media => media.photographerId === id);
+    console.log(media);
+    return mediaByPhotographer;
+};
 
 // Fonction qui affiche les media
+function displayMediaPhotographer(mediaPhotographer) {
+    const main = document.querySelector( '#main' );
+    const mediaGallery = mediaFactory(mediaPhotographer);
+    const mediaItem = mediaGallery.getMediaCardDOM();
+    main.appendChild(mediaItem);
+}
+
+
 
 async function init() {
     const data = await dataPhotographer( '../../data/photographers.json' );
@@ -42,21 +51,27 @@ async function init() {
     // les accolades permettent de récupérer l'objet photographers
     const {photographers, media} = data;
 
+    // Création d'une nouvelle instance de l'objet URLSP
+    // search contient la chaîne de requête de l'URL qui se trouve après le "?"
     const urlParams = new URLSearchParams(window.location.search);
-    const artistId = parseInt(urlParams.get('id'));
+    // Extraction  la valeur du paramètre "id" pour la convertir en integer
+    const photographerId = parseInt(urlParams.get('id'));
     
-    const photographer = findPhotographer(photographers, artistId);
-
+    const photographer = findPhotographer(photographers, photographerId);
+    
     // Génération du nom du photographe dans la Modal
     const artistName = document.querySelector('.nameArtist');
     artistName.textContent = photographer.name;
 
-    // Trouver la correspondance - commentaire à modifier
-    // const mediaPhotographer = findMediaPhotographer(media, artistId);
+    // Trouver les media correspondant aux photographes
+    mediaPhotographer = getMediaPhotographer(photographerId, media);
+
+    
 
     // appelle la fonction headerPhotographer
     headerPhotographer(photographer);
-    // findMediaPhotographer(media, id);
+    findMediaPhotographer(media, id);
+    displayMediaPhotographer(filteredMedia);
 };
 
 init();

@@ -18,8 +18,12 @@ function closeModal() {
   contactButton.style.display = 'block'
 }
 
+// On ajoute un écouteur d'événement à un élément (brut) du HTML
+// La fonction fléchée est déclenchée avec l'événement "e" en tant que paramètre
 main.addEventListener('click', (e) => {
+  // e.target permet d'obtenir l'élément spécifique sur lequel on a cliqué (ici le bouton)
   contactButton = e.target;
+  //  Condition qui vérifie si la classe de l'élément cliqué contient la classe "contact_button" (booléen)
   if (contactButton.classList.contains("contact_button")) {
     openModal();
   }
