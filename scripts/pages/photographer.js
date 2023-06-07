@@ -1,5 +1,5 @@
 import { photographerFactory } from "../factories/photographer.js"; 
-import { mediaFactory } from "../factories/media.js";
+// import { mediaFactory } from "../factories/media.js";
 
 let mediaPhotographer = [];
 
@@ -20,6 +20,8 @@ const findPhotographer  = (photographers, id) => {
 
 // Fonction qui affiche le header du photographe
 function headerPhotographer(photographer) {
+    console.log(photographer);
+
     const main = document.querySelector( '#main' );
     const headerModel = photographerFactory(photographer);
     const userCardHeader = headerModel.getPhotographerDOM();
@@ -31,7 +33,6 @@ function headerPhotographer(photographer) {
 // Recherche des media
 const getMediaPhotographer = (media, id) => {
     const mediaByPhotographer = media.filter(media => media.photographerId === id);
-    console.log(media);
     return mediaByPhotographer;
 };
 
@@ -49,7 +50,15 @@ async function init() {
     const data = await dataPhotographer( '../../data/photographers.json' );
 
     // les accolades permettent de récupérer l'objet photographers
-    const {photographers, media} = data;
+    // const {photographers, media} = data;
+    
+    const media = data.media.map(media => media = new TypeDataFactory("media"));
+    // console.log("media" );         
+    console.log(media); 
+
+    const photographers = data.photographers.map(photographer => photographer = new TypeDataFactory("photographers")); 
+    console.log(photographers); 
+    
 
     // Création d'une nouvelle instance de l'objet URLSP
     // search contient la chaîne de requête de l'URL qui se trouve après le "?"
@@ -64,14 +73,13 @@ async function init() {
     artistName.textContent = photographer.name;
 
     // Trouver les media correspondant aux photographes
-    mediaPhotographer = getMediaPhotographer(photographerId, media);
+    mediaPhotographer = getMediaPhotographer(media, photographerId);
 
     
 
     // appelle la fonction headerPhotographer
     headerPhotographer(photographer);
-    findMediaPhotographer(media, id);
-    displayMediaPhotographer(filteredMedia);
+    displayMediaPhotographer(mediaPhotographer);
 };
 
 init();
