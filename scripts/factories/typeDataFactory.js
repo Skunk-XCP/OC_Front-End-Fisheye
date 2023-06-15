@@ -1,8 +1,8 @@
 class TypeDataFactory {
-    constructor(data) {
-        if (data === "photographers") {
+    constructor(data, type) {
+        if (type === "photographer") {
             return new Photographer(data)
-        } else if (data === "media") {
+        } else if (type === "media") {
             return new Media(data)
         }else {
             throw "unknow type format"

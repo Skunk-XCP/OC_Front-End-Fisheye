@@ -1,5 +1,4 @@
-import { photographerFactory } from "../factories/photographer.js"; 
-// import { mediaFactory } from "../factories/media.js";
+import { getUserCardDOM, getPhotographerDOM } from "../utils/photographerUtils.js";
 
 let mediaPhotographer = [];
 
@@ -20,27 +19,28 @@ const findPhotographer  = (photographers, id) => {
 
 // Fonction qui affiche le header du photographe
 function headerPhotographer(photographer) {
-    console.log(photographer);
-
     const main = document.querySelector( '#main' );
-    const headerModel = photographerFactory(photographer);
+    const headerModel = getUserCardDOM(photographer);
     const userCardHeader = headerModel.getPhotographerDOM();
+    // const userCardHeader = getPhotographerDOM();
+
     main.appendChild(userCardHeader);
 
 };
 
 
-// Recherche des media
-const getMediaPhotographer = (media, id) => {
+// Recherche des medias
+const getMediaPhotographer = (id, media) => {
     const mediaByPhotographer = media.filter(media => media.photographerId === id);
     return mediaByPhotographer;
 };
 
-// Fonction qui affiche les media
+// Fonction qui affiche les medias
 function displayMediaPhotographer(mediaPhotographer) {
     const main = document.querySelector( '#main' );
     const mediaGallery = mediaFactory(mediaPhotographer);
     const mediaItem = mediaGallery.getMediaCardDOM();
+
     main.appendChild(mediaItem);
 }
 
@@ -52,34 +52,31 @@ async function init() {
     // les accolades permettent de récupérer l'objet photographers
     // const {photographers, media} = data;
     
-    const media = data.media.map(media => media = new TypeDataFactory("media"));
-    // console.log("media" );         
-    console.log(media); 
-
-    const photographers = data.photographers.map(photographer => photographer = new TypeDataFactory("photographers")); 
-    console.log(photographers); 
+    const photographers = data.photographers.map(photographer => new TypeDataFactory(photographer, "photographer")); 
+    
+    const medias = data.media.map(media => new TypeDataFactory(media, "media"));
     
 
     // Création d'une nouvelle instance de l'objet URLSP
     // search contient la chaîne de requête de l'URL qui se trouve après le "?"
     const urlParams = new URLSearchParams(window.location.search);
+
     // Extraction  la valeur du paramètre "id" pour la convertir en integer
     const photographerId = parseInt(urlParams.get('id'));
     
     const photographer = findPhotographer(photographers, photographerId);
+    // Trouver les media correspondant aux photographes
+    mediaPhotographer = getMediaPhotographer(photographerId, medias);
+
     
     // Génération du nom du photographe dans la Modal
     const artistName = document.querySelector('.nameArtist');
     artistName.textContent = photographer.name;
 
-    // Trouver les media correspondant aux photographes
-    mediaPhotographer = getMediaPhotographer(media, photographerId);
-
-    
 
     // appelle la fonction headerPhotographer
     headerPhotographer(photographer);
-    displayMediaPhotographer(mediaPhotographer);
+    displayMediaPhotographer(mediaPhotographer, photographerId);
 };
 
 init();
