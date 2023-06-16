@@ -4,14 +4,14 @@ function getMediaCardDOM(media) {
             
     const mediaCard = `
     <div>
-        <a href="photographer.html?id=${media.id}">
+        <a href="${srcMedia(media)}" title="ouvrir le media">
             ${typeOfMedia(media)}
         </a>
         <div class="infosMedia">
-            <h3>${media.title}</h3>
+            <p>${media.title}</p>
             <p>
-                <span>${media.likes}</span>
-                <span><i class="fa-solid fa-heart"></i></span>
+                <span>${media.likes}</span> 
+                <span><i class="fa-solid fa-heart"></i><span>
             </p>
         </div>
     </div>
@@ -19,16 +19,21 @@ function getMediaCardDOM(media) {
 
     article.innerHTML = mediaCard;
     return article;
-
-
 }
 
 function typeOfMedia(media) {
-    new TypeMediaFactory(media);
-    if (media.image) {
+    if (media._image) {
         return `<img src="${media.image}" alt="${media.title}">`
-    } else if (media.video) {
-        return `<video src="${media.video}" aria-label="${media.title}" control="true" poster=""></video>`
+    } else if (media._video) {
+        return `<video src="${media.video}" aria-label="${media.title}" controls="true" poster=""></video>`
+    }
+}
+
+function srcMedia(media) {
+    if (media._image) {
+        return `${media.image}`
+    } else if (media._video) {
+        return `${media.video}`
     }
 }
 

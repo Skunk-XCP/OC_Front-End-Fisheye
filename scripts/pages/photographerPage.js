@@ -22,12 +22,9 @@ const findPhotographer  = (photographers, id) => {
 function headerPhotographer(photographer) {
     const main = document.querySelector( '#main' );
     const userCardHeader = getPhotographerDOM(photographer);
-    // const userCardHeader = getPhotographerDOM();
 
     main.appendChild(userCardHeader);
-
 };
-
 
 // Recherche des medias
 const getMediaPhotographer = (id, media) => {
@@ -47,22 +44,17 @@ function displayMediaPhotographer(mediaPhotographer, photographerId) {
 
         mediaSection.appendChild(mediaGallery);
     })
+    
     main.appendChild(mediaSection);
 }
-
-
 
 async function init() {
     const data = await dataPhotographer( '../../data/photographers.json' );
 
-    // les accolades permettent de récupérer l'objet photographers
-    // const {photographers, media} = data;
-    
     const photographers = data.photographers.map(photographer => new TypeDataFactory(photographer, "photographer")); 
     
     const medias = data.media.map(media => new TypeDataFactory(media, "media"));
     
-
     // Création d'une nouvelle instance de l'objet URLSP
     // search contient la chaîne de requête de l'URL qui se trouve après le "?"
     const urlParams = new URLSearchParams(window.location.search);
@@ -74,11 +66,11 @@ async function init() {
     // Trouver les media correspondant aux photographes
     mediaPhotographer = getMediaPhotographer(photographerId, medias);
 
-    
+    const allMedias = mediaPhotographer.map(media => new TypeMediaFactory(media));
+        
     // Génération du nom du photographe dans la Modal
     const artistName = document.querySelector('.nameArtist');
     artistName.textContent = photographer.name;
-
 
     // appelle la fonction headerPhotographer
     headerPhotographer(photographer);

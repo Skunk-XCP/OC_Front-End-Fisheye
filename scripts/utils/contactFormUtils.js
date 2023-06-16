@@ -35,23 +35,23 @@ const formElement = document.querySelector('form');
 
 const createForm = `
   <div>
-    <label for="firstname"></label>
-    <input id="firstname" type="text" name="firstname" required="required" aria-required="true">
+    <label for="firstname">Prénom</label>
+    <input id="firstname" type="text" name="firstname" placeholder="Saisissez votre prénom" aria-labelledby="firstname" required="required" aria-required="true">
   </div>
   <div>
-    <label for="lastname"></label>
-    <input id="lastname" type="text" name="lastname" required="required" aria-required="true">
+    <label for="lastname">Nom</label>
+    <input id="lastname" type="text" name="lastname" placeholder="Saisissez votre nom" aria-labelledby="lastname" required="required" aria-required="true">
   </div>
   <div>
-    <label for="email"></label>
-    <input id="email" type="email" name="email" required="required" aria-required="true">
+    <label for="email">E-mail</label>
+    <input id="email" type="email" name="email" placeholder="Saisissez votre adresse email" aria-labelledby="email" required="required" aria-required="true">
   </div>
   <div>
-    <label for="message"></label>
-    <textarea id="message" name="message" required="required" aria-required="true" rows="4"></textarea>
+    <label for="message">Message</label>
+    <textarea id="message" name="message" required="required" placeholder="Saisissez votre message" aria-labelledby="message" aria-required="true" rows="4"></textarea>
   </div>
   <div>
-    <button class="sendBtn modal_buttons">Envoyer</button>
+    <button class="sendBtn modal_buttons" aria-label="envoyer le formulaire">Envoyer</button>
   </div>
 `;
 

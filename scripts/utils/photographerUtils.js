@@ -21,7 +21,7 @@
         div.classList.add("photograph-header");
 
         const photographerHeader = `
-            <h2>${photographer.name}</h2>
+            <h1>${photographer.name}</h1>
             <p>${photographer.tagline}</p>
             <p>${photographer.city}, ${photographer.country}</p>
             <button class="contact_button modal_buttons">Contactez-moi</button>
