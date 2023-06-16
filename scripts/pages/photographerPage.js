@@ -1,4 +1,5 @@
-import { getUserCardDOM, getPhotographerDOM } from "../utils/photographerUtils.js";
+import { getPhotographerDOM } from "../utils/photographerUtils.js";
+import { getMediaCardDOM } from "../utils/mediaUtils.js";
 
 let mediaPhotographer = [];
 
@@ -20,8 +21,7 @@ const findPhotographer  = (photographers, id) => {
 // Fonction qui affiche le header du photographe
 function headerPhotographer(photographer) {
     const main = document.querySelector( '#main' );
-    const headerModel = getUserCardDOM(photographer);
-    const userCardHeader = headerModel.getPhotographerDOM();
+    const userCardHeader = getPhotographerDOM(photographer);
     // const userCardHeader = getPhotographerDOM();
 
     main.appendChild(userCardHeader);
@@ -36,12 +36,18 @@ const getMediaPhotographer = (id, media) => {
 };
 
 // Fonction qui affiche les medias
-function displayMediaPhotographer(mediaPhotographer) {
+function displayMediaPhotographer(mediaPhotographer, photographerId) {
     const main = document.querySelector( '#main' );
-    const mediaGallery = mediaFactory(mediaPhotographer);
-    const mediaItem = mediaGallery.getMediaCardDOM();
+    const mediaSection = document.createElement('div')
+    mediaSection.classList.add('media-gallery')
 
-    main.appendChild(mediaItem);
+    const photographerMedia = getMediaPhotographer(photographerId, mediaPhotographer);
+    photographerMedia.forEach(media => {
+        const mediaGallery = getMediaCardDOM(media);
+
+        mediaSection.appendChild(mediaGallery);
+    })
+    main.appendChild(mediaSection);
 }
 
 

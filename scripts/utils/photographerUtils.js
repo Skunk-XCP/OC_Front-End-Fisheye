@@ -22,10 +22,10 @@
 
         const photographerHeader = `
             <h2>${photographer.name}</h2>
-            <p>${tagline}</p>
-            <p>${city}, ${country}</p>
+            <p>${photographer.tagline}</p>
+            <p>${photographer.city}, ${photographer.country}</p>
             <button class="contact_button modal_buttons">Contactez-moi</button>
-            <img src="${picture}" alt="Photo de ${photographer.name}">
+            <img src="${photographer.portrait}" alt="Photo de ${photographer.name}">
         `;
 
         div.innerHTML = photographerHeader;
