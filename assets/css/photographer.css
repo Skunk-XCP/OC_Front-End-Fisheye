@@ -207,6 +207,7 @@ form textarea {
     align-items: center;
     color: #901C1C;
     font-size: 1.5em;
+    margin-top: 10px;
 }
 
 .infosMedia>p>span:nth-child(2) {

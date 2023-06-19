@@ -35,8 +35,8 @@ const getMediaPhotographer = (id, media) => {
 // Fonction qui affiche les medias
 function displayMediaPhotographer(mediaPhotographer, photographerId) {
     const main = document.querySelector( '#main' );
-    const mediaSection = document.createElement('div')
-    mediaSection.classList.add('media-gallery')
+    const mediaSection = document.createElement('div');
+    mediaSection.classList.add('media-gallery');
 
     const photographerMedia = getMediaPhotographer(photographerId, mediaPhotographer);
     photographerMedia.forEach(media => {
@@ -75,6 +75,7 @@ async function init() {
     // appelle la fonction headerPhotographer
     headerPhotographer(photographer);
     displayMediaPhotographer(mediaPhotographer, photographerId);
+
 };
 
 init();
