@@ -22,13 +22,13 @@ class Media {
         return this._title
     }
 
-    get image() {
-        return `assets/images/${this._photographerId}/${this._image}`
-    }
+    // get image() {
+    //     return `assets/images/${this._photographerId}/${this._image}`
+    // }
 
-    get video() {
-        return `assets/images/${this._photographerId}/${this._video}`
-    }
+    // get video() {
+    //     return `assets/images/${this._photographerId}/${this._video}`
+    // }
 
     get likes() {
         return this._likes

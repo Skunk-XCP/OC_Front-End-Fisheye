@@ -33,4 +33,21 @@
         return div;
     }
 
-export { getUserCardDOM, getPhotographerDOM };
+    function getLikesAndPrice(photographer, media) {
+        const div = document.createElement('div');
+        div.classList.add('likes-price');
+    
+        const likesPriceLabel = `
+            <p>
+                <span>${media.likes}</span> 
+                <span><i class="fa-solid fa-heart"></i><span>
+                <span>${photographer.price}</span> 
+            </p>
+            `
+    
+            div.innerHTML = likesPriceLabel;
+            return div;
+    
+    }
+
+export { getUserCardDOM, getPhotographerDOM, getLikesAndPrice };

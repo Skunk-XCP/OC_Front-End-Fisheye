@@ -1,3 +1,6 @@
+// import {Image} from '../models/image.js'
+// import {Video} from '../models/video.js'
+
 function getMediaCardDOM(media) {
     const article = document.createElement( 'article' );
     article.classList.add("mediaArticle");
@@ -21,19 +24,38 @@ function getMediaCardDOM(media) {
     return article;
 }
 
+// function typeOfMedia(media) {
+//     if (media._image) {
+//         return `<img src="${media.image}" alt="${media.title}">`
+//     } else if (media._video) {
+//         return `<video src="${media.video}" aria-label="${media.title}" controls="true" poster=""></video>`
+//     }
+// }
+
+// function srcMedia(media) {
+//     if (media._image) {
+//         return `${media.image}`
+//     } else if (media._video) {
+//         return `${media.video}`
+//     }
+// }
+
+
 function typeOfMedia(media) {
-    if (media._image) {
-        return `<img src="${media.image}" alt="${media.title}">`
-    } else if (media._video) {
-        return `<video src="${media.video}" aria-label="${media.title}" controls="true" poster=""></video>`
+    if (media instanceof Image) {
+        const imagePath = media.getImagePath(); // Appel de la méthode getImagePath() pour Image
+        return `<img src="${imagePath}" alt="${media.title}">`;
+    } else if (media instanceof Video) {
+        return `<video src="${media.video}" aria-label="${media.title}" controls="true" poster=""></video>`;
     }
 }
 
 function srcMedia(media) {
-    if (media._image) {
-        return `${media.image}`
-    } else if (media._video) {
-        return `${media.video}`
+    if (media instanceof Image) {
+        const imagePath = media.getImagePath(); // Appel de la méthode getImagePath() pour Image
+        return `${imagePath}`;
+    } else if (media instanceof Video) {
+        return `${media.video}`;
     }
 }
 

@@ -1,10 +1,10 @@
 class TypeMediaFactory {
     constructor(data) {
         if (data.image) {
-            return new Media(data)
+            return new Image(data)
         }
         else if (data.video) {
-            return new Media(data)
+            return new Video(data)
         }
         else {
             throw "unknown format"

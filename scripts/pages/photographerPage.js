@@ -48,6 +48,17 @@ function displayMediaPhotographer(mediaPhotographer, photographerId) {
     main.appendChild(mediaSection);
 }
 
+
+// Fonction incrément/décrément likes
+
+let newLike = false;
+
+// function addLike() {
+//     for (i = 0; i < ; i++) {
+
+//     }
+// }
+
 async function init() {
     const data = await dataPhotographer( '../../data/photographers.json' );
 
