@@ -1,4 +1,4 @@
-class Video extends TypeMediaFactory {
+class Video extends Media {
     constructor(id, photographerId, title, likes, date, video) {
         super({id, photographerId, title, likes, date});
         this._video = video;
@@ -7,5 +7,4 @@ class Video extends TypeMediaFactory {
     getImagePath() {
         return `assets/images/${this.photographerId}/${this.video}`;
     }
-    
 }

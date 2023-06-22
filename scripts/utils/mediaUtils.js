@@ -1,5 +1,3 @@
-// import {Image} from '../models/image.js'
-// import {Video} from '../models/video.js'
 
 function getMediaCardDOM(media) {
     const article = document.createElement( 'article' );
@@ -46,7 +44,8 @@ function typeOfMedia(media) {
         const imagePath = media.getImagePath(); // Appel de la méthode getImagePath() pour Image
         return `<img src="${imagePath}" alt="${media.title}">`;
     } else if (media instanceof Video) {
-        return `<video src="${media.video}" aria-label="${media.title}" controls="true" poster=""></video>`;
+        const videoPath = media.getVideoPath(); // Appel de la méthode getVideoPath() pour Video
+        return `<video src="${videoPath}" aria-label="${media.title}" controls="true" poster=""></video>`;
     }
 }
 
@@ -55,8 +54,12 @@ function srcMedia(media) {
         const imagePath = media.getImagePath(); // Appel de la méthode getImagePath() pour Image
         return `${imagePath}`;
     } else if (media instanceof Video) {
-        return `${media.video}`;
+        const videoPath = media.getVideoPath(); // Appel de la méthode getVideoPath() pour Video
+        return `${videoPath}`;
     }
 }
+
+
+
 
 export { getMediaCardDOM }
