@@ -1,5 +1,4 @@
-import { getPhotographerDOM } from "../utils/photographerUtils.js";
-import { getMediaCardDOM } from "../utils/mediaUtils.js";
+
 
 let mediaPhotographer = [];
 
@@ -78,16 +77,16 @@ async function init() {
     mediaPhotographer = getMediaPhotographer(photographerId, medias);
 
     const allMedias = mediaPhotographer.map(media => new TypeMediaFactory(media));
-        
+    photographer.medias = allMedias;    
     // Génération du nom du photographe dans la Modal
     const artistName = document.querySelector('.nameArtist');
     artistName.textContent = photographer.name;
 
     // appelle la fonction headerPhotographer
     headerPhotographer(photographer);
-    displayMediaPhotographer(mediaPhotographer, photographerId);
+    displayMediaPhotographer(photographer.medias, photographerId);
 
-};
+}
 
 init();
 

@@ -1,10 +1,15 @@
 class Video extends Media {
-    constructor(id, photographerId, title, likes, date, video) {
-        super({id, photographerId, title, likes, date});
-        this._video = video;
+    constructor(data) {
+        super(data);
+        this._video = data._video;
     }
 
-    getImagePath() {
-        return `assets/images/${this.photographerId}/${this.video}`;
+    getPath() {
+        return `assets/images/${this._photographerId}/${this._video}`;
     }
+
+    getTypeOfMedia() {
+        return `<video src="${this.getPath()}" aria-label="${this._title}" controls="true" poster=""></video>`;
+    }
+
 }

@@ -36,4 +36,12 @@ class Photographer {
     get portrait() {
         return `assets/photographers/${this._portrait}`
     }
+
+    set medias(medias) {
+        this._medias = medias;
+    }
+
+    get medias() {
+        return this._medias;
+    }
 }
