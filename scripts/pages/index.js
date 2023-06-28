@@ -10,7 +10,6 @@ function displayData(photographers) {
 
   photographers.forEach((photographer) => {
     const userCardDOM = getUserCardDOM(photographer);
-    console.log(userCardDOM);
     photographersSection.appendChild(userCardDOM);
   });
 }
