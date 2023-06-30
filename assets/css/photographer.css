@@ -232,13 +232,59 @@ form textarea {
     position: fixed;
     width: 100vw;
     height: 100vh;
-    background-color: #80808080;
+    background-color: #FFF;
     top: 0;
     left: 0;
+    z-index: 20;
+}
+
+.closeLightbox {
+    position: absolute;
+    top: 7%;
+    right: -5%;
+    font-size: 2em;
+    color: #901C1C;
+    z-index: 30;
 }
 
 .lightboxContent {
-    width: 200px;
-    height: 200px;
-    border: #901C1C 2px solid;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%) ;
+    width: 1242px;
+    height: 900px;
+    background-color: pink;
+}
+
+.lightboxContent > a > img, 
+.lightboxContent > a > video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+
+}
+
+.prev {
+    position: absolute;
+    left: -5%;
+    top: 50%;
+    transform: translateY(-50%) ;
+    color: #901C1C;
+    font-size: 2em;
+
+}
+
+.next {
+    position: absolute;
+    right: -5%;
+    top: 50%;
+    transform: translateY(-50%) ;
+    color: #901C1C;
+    font-size: 2em;
+}
+
+.lightboxTitle {
+    color: #901C1C;
+    font-size: 2em;
+    margin: 0;
 }

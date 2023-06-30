@@ -42,13 +42,39 @@ function displayMediaPhotographer(mediaPhotographer, photographerId) {
 
         const displayLightbox = getLightbox(media);
 
+        const lightbox = new Lightbox(displayLightbox);
+
+        mediaGallery.addEventListener('click', (e) => {
+            // Afficher la lightbox
+            // displayLightbox.style.display = 'block';
+            e.preventDefault();
+            lightbox.show();
+        });
+
+        window.addEventListener('load', () => {
+            const nextButton = document.querySelector('.next')
+
+            nextButton.addEventListener('click', () => {
+                lightbox.next();
+            });
+        });
+
+        window.addEventListener('load', () => {
+            const prevButton = document.querySelector('.prev')
+
+            prevButton.addEventListener('click', () => {
+                lightbox.previous();
+            });
+        });
+
         mediaSection.appendChild(mediaGallery);
         mediaSection.appendChild(displayLightbox);
     });
 
-
     main.appendChild(mediaSection);
 }
+
+
 
 
 async function init() {

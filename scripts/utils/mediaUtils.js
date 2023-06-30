@@ -20,14 +20,6 @@ function getMediaCardDOM(media) {
 
     article.innerHTML = mediaCard;
 
-//____________________________________________________________________
-// CODE TEMPORAIRE - À EFFACER
-const mediaLink = article.querySelector('a');
-    mediaLink.addEventListener('click', function(event) {
-        event.preventDefault(); 
-    });
-//____________________________________________________________________
-
     return article;
 }
 
@@ -37,14 +29,12 @@ function getLightbox(media) {
     lightbox.id = 'lightbox';
 
     const lightboxContainer = `
-        <span></span>
-        <div>
-            <div class="lightboxContent">
-                <a href="${media.getPath()}" title="ouvrir le media">
-                    ${media.getTypeOfMedia()}
-                </a>
-                <p>${media.title}</p>
-            </div>
+        <div class="lightboxContent">
+            <span class="closeLightbox"><i class="fas fa-times"></i></span>
+            <a href="${media.getPath()}" title="ouvrir le media">
+                ${media.getTypeOfMedia()}
+            </a>
+            <p class="lightboxTitle">${media.title}</p>
             <span class="prev"><i class="fas fa-angle-left"></i></span>
             <span class="next"><i class="fas fa-angle-right"></i></span>
         </div>
