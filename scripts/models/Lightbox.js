@@ -1,23 +1,36 @@
 class Lightbox {
-    constructor(lightboxElement, ) {
+    constructor(lightboxElement, galleryElements, mediaPhotographer, index) {
         this.lightboxElement = lightboxElement;
-        this.currentElement = null;
+        this.galleryElements = galleryElements;
+        this.mediaPhotographer = mediaPhotographer;
+        this.currentElement = index;
     }
 
-    show() {
+    show(media) {
+        let lightboxContent = getLightbox(media);
+        this.lightboxElement.appendChild(lightboxContent);
         this.lightboxElement.style.display = 'block';
+
+        let nextButton = this.lightboxElement.querySelector('.next');
+        nextButton.addEventListener('click', this.goToNext.bind(this));
+
     }
 
-    next() {
-        let index = this.lightboxElement.findIndex(element => element.getPath() == this.currentElement.getPath());
-        this.currentElement = this.lightboxElement[index + 1];
+    goToNext() {
+        if (this.currentElement < this.galleryElements.length - 1) {
+            this.currentElement++;
+            let newMedia = this.galleryElements[this.currentElement];
+
+            this.updateContent(newMedia);
+        }
+
     }
 
     previous() {
 
     }
 
-    manageEvent() {
+    close() {
 
     }
 

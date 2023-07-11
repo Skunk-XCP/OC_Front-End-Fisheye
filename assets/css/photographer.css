@@ -65,6 +65,11 @@
     transform: translate(-50%, -50%);
 }
 
+.contact_button:hover {
+    background-color: #DB8876;
+    color: black;
+}
+
 .sendBtn {
     margin-top: 20px;
     width: 140px;
@@ -160,11 +165,74 @@ form textarea {
     border: none;
 }
 
+.filters {
+    margin-left: 100px;
+    display: flex;
+    list-style: none ;
+    font-size: 1.1em;
+}
+
+.filters p {
+    margin: 40px 20px 0 0;
+    font-weight: bold;
+}
+
+.filters div {
+    width: 170px;
+    position: relative;
+}
+
+.chevronFilter {
+    position: absolute;
+    top: 45px;
+    left: 120px;
+    color: white;
+    rotate: 180deg;
+}
+
+.filters div ul {
+    width: 100%;
+    padding: 0;
+}
+
+.filters div ul li {
+    list-style: none ;
+}
+
+.filters button {
+    background-color: #901C1C;
+    width: 100%;
+    list-style: none ;
+    color: white;
+    font-size: 1.1em;
+    height: 69px;
+    text-align: start;
+    border: none;
+    cursor: pointer;
+}
+
+.filters li:nth-child(1) button {
+    border-radius: 5px 5px 0 0;
+}
+
+.filters li:nth-child(3) button {
+    border-radius: 0 0 5px 5px;
+}
+
+.filters button:hover {
+    background-color: #DB8876;
+    color: black;
+}
+
+.filters button span {
+    margin-left: 25px;
+}
+
 .media-gallery {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 100px;
-    margin: 100px;
+    margin: 100px 100px 170px 100px;
 }
 
 .mediaArticle {
@@ -232,7 +300,7 @@ form textarea {
     position: fixed;
     width: 100vw;
     height: 100vh;
-    background-color: #FFF;
+    background-color: #493304;
     top: 0;
     left: 0;
     z-index: 20;
@@ -261,7 +329,6 @@ form textarea {
     width: 100%;
     height: 100%;
     object-fit: contain;
-
 }
 
 .prev {
@@ -271,7 +338,6 @@ form textarea {
     transform: translateY(-50%) ;
     color: #901C1C;
     font-size: 2em;
-
 }
 
 .next {

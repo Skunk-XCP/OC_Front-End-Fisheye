@@ -37,44 +37,113 @@ function displayMediaPhotographer(mediaPhotographer, photographerId) {
     mediaSection.classList.add('media-gallery');
 
     const photographerMedia = getMediaPhotographer(photographerId, mediaPhotographer);
-    photographerMedia.forEach(media => {
+
+    photographerMedia.forEach((media, index) => {
         const mediaGallery = getMediaCardDOM(media);
 
-        const displayLightbox = getLightbox(media);
-
-        const lightbox = new Lightbox(displayLightbox);
-
-        mediaGallery.addEventListener('click', (e) => {
-            // Afficher la lightbox
-            // displayLightbox.style.display = 'block';
-            e.preventDefault();
-            lightbox.show();
-        });
-
-        window.addEventListener('load', () => {
-            const nextButton = document.querySelector('.next')
-
-            nextButton.addEventListener('click', () => {
-                lightbox.next();
-            });
-        });
-
-        window.addEventListener('load', () => {
-            const prevButton = document.querySelector('.prev')
-
-            prevButton.addEventListener('click', () => {
-                lightbox.previous();
-            });
-        });
-
         mediaSection.appendChild(mediaGallery);
-        mediaSection.appendChild(displayLightbox);
+
+        // initLightbox(mediaGallery, media, photographerId, mediaPhotographer, index);
+
     });
 
     main.appendChild(mediaSection);
 }
 
+// Tri des medias par popularité
+ function popularSort(allMedias, photographerId) {
+    const popularFilter = document.querySelector(".popularFilter")
+   
+    popularFilter.addEventListener('click', () => {
+        const gallery = document.querySelector('.media-gallery')
+        gallery.innerHTML = '';
 
+        const popular = allMedias.sort(function(a,b) {
+            return b._likes - a._likes;
+        });
+
+        displayMediaPhotographer(popular, photographerId);
+    })
+}
+
+// Tri des medias par date
+function dateSort(allMedias, photographerId) {
+    const dateFilter = document.querySelector(".dateFilter")
+
+    dateFilter.addEventListener('click', () => {
+        const gallery = document.querySelector('.media-gallery')
+        gallery.innerHTML = '';
+
+        const date = allMedias.sort(function(a, b) {
+            return new Date(b.date) - new Date(a.date);
+        });
+
+        displayMediaPhotographer(date, photographerId);
+    })
+}
+
+// Tri des medias par titre
+function titleSort(allMedias, photographerId) {
+    const titleFilter = document.querySelector(".titleFilter")
+
+    titleFilter.addEventListener('click', () => {
+        const gallery = document.querySelector('.media-gallery')
+        gallery.innerHTML = '';
+
+        const title = allMedias.sort((a, b) => a._title.localeCompare(b._title));
+        displayMediaPhotographer(title, photographerId);
+    });
+}
+
+
+
+
+
+
+
+
+
+function incrementLikes(totalLikes) {
+
+    const likeNumberElement = document.querySelectorAll('.likeNumber');
+    const likeButton = document.querySelectorAll('.likeLogo');
+    const spanTotalLikes = document.querySelector('.totalLikeNumber');
+
+    likeButton.forEach((heart, index) => {
+        heart.addEventListener('click', () => {
+            if (!heart.classList.contains('clicked')) {
+                likeNumberElement[index].innerHTML++
+                heart.classList.add('clicked')
+                totalLikes++
+                spanTotalLikes.innerHTML = `
+                <span class="totalLikeNumber" aria-label="total de likes">${totalLikes}</span> 
+                `;
+            } else {
+                likeNumberElement[index].innerHTML--
+                heart.classList.remove('clicked')
+                totalLikes--
+                spanTotalLikes.innerHTML = `
+                <span class="totalLikeNumber" aria-label="total de likes">${totalLikes}</span> 
+                `;
+            }
+        })
+    })
+}
+
+function initLightbox(mediaElement, media, mediaPhotographer, index) {
+    mediaElement.addEventListener('click', (e) => {
+        e.preventDefault();
+        let lightboxElement = getLightbox(media);
+        document.body.appendChild(lightboxElement);
+
+
+        let mediaElement = document.querySelector(`#lightbox`);
+        let galleryElements = mediaPhotographer; // récupération des éléments de la galerie
+        let lightbox = new Lightbox(mediaElement, galleryElements, mediaPhotographer, index);
+
+        lightbox.show(media);
+    });
+}
 
 
 async function init() {
@@ -92,21 +161,14 @@ async function init() {
     const photographerId = parseInt(urlParams.get('id'));
 
     const photographer = findPhotographer(photographers, photographerId);
-    // Trouver les media correspondant aux photographes
+    // On utilise nos instances de Image ou Video pour récupérer les medias du photographe
     mediaPhotographer = getMediaPhotographer(photographerId, medias);
+    photographer.medias = mediaPhotographer;
+
 
     const allLikes = mediaPhotographer.map(medias => medias.likes);
 
     const totalLikes = allLikes.reduce((a, b) => a + b, 0)
-
-
-    const displayLikesAndPrice = getLikesAndPrice(photographer);
-    main.appendChild(displayLikesAndPrice);
-
-    const spanTotalLikes =  document.querySelector('.totalLikeNumber');
-    spanTotalLikes.innerHTML = `
-    <span class="totalLikeNumber" aria-label="total de likes">${totalLikes}</span> 
-    `;
 
     const allMedias = mediaPhotographer.map(media => new TypeMediaFactory(media));
     photographer.medias = allMedias;
@@ -114,10 +176,27 @@ async function init() {
     const artistName = document.querySelector('.nameArtist');
     artistName.textContent = photographer.name;
 
-    // appelle la fonction headerPhotographer
+    // appel des fonctions
     headerPhotographer(photographer);
+    const filterModule = filters();
+    main.appendChild(filterModule);
+
     displayMediaPhotographer(photographer.medias, photographerId);
     
+    popularSort(allMedias, photographerId);
+    dateSort(allMedias, photographerId);
+    titleSort(allMedias, photographerId);
+
+    const displayLikesAndPrice = getLikesAndPrice(photographer);
+    main.appendChild(displayLikesAndPrice);
+
+    const spanTotalLikes = document.querySelector('.totalLikeNumber');
+    spanTotalLikes.innerHTML = `
+    <span class="totalLikeNumber" aria-label="total de likes">${totalLikes}</span> 
+    `;
+
+    // sortByPopularity(photographer.medias, photographerId);
+    incrementLikes(totalLikes);
 
 }
 
