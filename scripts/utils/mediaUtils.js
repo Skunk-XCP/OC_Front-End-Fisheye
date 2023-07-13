@@ -28,20 +28,23 @@ function getLightbox(media) {
     const lightbox = document.createElement("dialog");
     lightbox.id = 'lightbox';
 
-    const lightboxContainer = `
-        <div class="lightboxContent">
-            <span class="closeLightbox"><i class="fas fa-times"></i></span>
-            <a href="${media.getPath()}" title="ouvrir le media">
-                ${media.getTypeOfMedia()}
-            </a>
-            <p class="lightboxTitle">${media.title}</p>
-            <span class="prev"><i class="fas fa-angle-left"></i></span>
-            <span class="next"><i class="fas fa-angle-right"></i></span>
-        </div>
-    `;
+    const lightboxContainer = generateInnerHtmlLightBox(media);
 
     lightbox.innerHTML = lightboxContainer;
     return lightbox;
+}
+
+function generateInnerHtmlLightBox(media) {
+    return  `<div class="lightboxContent">
+    <span class="closeLightbox"><i class="fas fa-times"></i></span>
+    <a href="${media.getPath()}" title="ouvrir le media">
+        ${media.getTypeOfMedia()}
+    </a>
+    <p class="lightboxTitle">${media.title}</p>
+    <span class="prev"><i class="fas fa-angle-left"></i></span>
+    <span class="next"><i class="fas fa-angle-right"></i></span>
+</div>
+`
 }
 
 function filters() {
@@ -50,18 +53,18 @@ function filters() {
 
     const filter = `
         <p>Trier par </p>
-        <div>
+        <div class="filtersContainer">
             <i class="fa-solid fa-chevron-up chevronFilter"></i>
-            <ul>
-                <li class="popularFilter"><button>Popularité<span></span></button></li>
-                <li class="dateFilter"><button>Date</button></li>
-                <li class="titleFilter"><button>Titre</button></li>
+            <ul class="filtersUl">
+                <li ><button class="popularFilter">Popularité<span></span></button></li>
+                <li ><button class="dateFilter">Date</button></li>
+                <li ><button class="titleFilter">Titre</button></li>
             </ul>
         </div>
-        
     `;
 
     div.innerHTML = filter;
+    filterAnimation(div);
     return div;
 }
 

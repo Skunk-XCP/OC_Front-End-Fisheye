@@ -6,9 +6,7 @@ class Lightbox {
         this.currentElement = index;
     }
 
-    show(media) {
-        let lightboxContent = getLightbox(media);
-        this.lightboxElement.appendChild(lightboxContent);
+    show() {
         this.lightboxElement.style.display = 'block';
 
         let nextButton = this.lightboxElement.querySelector('.next');
@@ -17,12 +15,8 @@ class Lightbox {
     }
 
     goToNext() {
-        if (this.currentElement < this.galleryElements.length - 1) {
-            this.currentElement++;
-            let newMedia = this.galleryElements[this.currentElement];
-
-            this.updateContent(newMedia);
-        }
+        this.currentElement = (this.currentElement + 1) % this.mediaPhotographer.length;
+        this.updateContent();
 
     }
 
@@ -33,5 +27,25 @@ class Lightbox {
     close() {
 
     }
+
+    updateContent() {
+        this.lightboxElement.innerHTML = generateInnerHtmlLightBox(this.mediaPhotographer);
+    }
+
+
+    // updateContent(newMedia) {
+    //     // Supprime le contenu actuel de la lightbox
+    //     while (this.lightboxElement.firstChild) {
+    //         this.lightboxElement.removeChild(this.lightboxElement.firstChild);
+    //     }
+    
+    //     let newContent = getLightbox(newMedia);
+    
+    //     this.lightboxElement.appendChild(newContent);
+    
+    //     let nextButton = this.lightboxElement.querySelector('.next');
+    //     nextButton.addEventListener('click', this.goToNext.bind(this));
+    
+    // }
 
 }
