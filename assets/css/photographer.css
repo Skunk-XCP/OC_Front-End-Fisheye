@@ -168,8 +168,10 @@ form textarea {
 .filters {
     margin-left: 100px;
     display: flex;
-    list-style: none ;
+    list-style: none;
     font-size: 1.1em;
+    position: relative;
+    z-index: 20;
 }
 
 .filters p {
@@ -177,55 +179,86 @@ form textarea {
     font-weight: bold;
 }
 
-.filters div {
-    width: 170px;
-    position: relative;
+.filtersContainer {
+    width: 180px;
+    position: absolute;
+    left: 90px;
 }
 
 .chevronFilter {
     position: absolute;
-    top: 45px;
-    left: 120px;
+    padding: 20px 20px 20px 20px;
+    top: 20px;
+    right: 10px;
     color: white;
-    rotate: 180deg;
+    transition: transform 0.3s ease;
 }
 
-.filters div ul {
+.chevronFilter.rotated {
+    transform: rotate(180deg);
+}
+
+.filtersUl {
     width: 100%;
     padding: 0;
+    transition: max-height 0.3s ease;
+    max-height: 69px; /* hauteur du bouton popularFilter */
+    overflow: hidden;
 }
 
-.filters div ul li {
-    list-style: none ;
+.filtersUl li {
+    list-style: none;
 }
 
 .filters button {
     background-color: #901C1C;
     width: 100%;
-    list-style: none ;
+    list-style: none;
     color: white;
     font-size: 1.1em;
-    height: 69px;
+    height: 68px;
     text-align: start;
     border: none;
     cursor: pointer;
 }
 
-.filters li:nth-child(1) button {
-    border-radius: 5px 5px 0 0;
+.filtersUl li:nth-child(1) button {
+    border-radius: 5px;
 }
 
-.filters li:nth-child(3) button {
+.filtersUl li:nth-child(3) button {
     border-radius: 0 0 5px 5px;
 }
 
-.filters button:hover {
+.filtersUl button:hover {
     background-color: #DB8876;
     color: black;
 }
 
-.filters button span {
+.filtersUl button span {
     margin-left: 25px;
+}
+
+/* pour masquer les autres éléments de la liste par défaut */
+.filtersUl li:nth-child(n+2) {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+}
+
+/* pour afficher les autres éléments de la liste lors de l'expansion */
+.filtersUl.expanded {
+    max-height: 207px; /* 3 x hauteur des boutons (69px x 3) */
+}
+
+.filtersUl li:nth-child(1) button.expanded {
+    border-radius: 5px 5px 0 0;
+}
+
+.filtersUl.expanded li:nth-child(n+2) {
+    max-height: 69px;
+    opacity: 1;
 }
 
 .media-gallery {
