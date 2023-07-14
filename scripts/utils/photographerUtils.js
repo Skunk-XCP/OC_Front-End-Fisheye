@@ -22,7 +22,7 @@ function getPhotographerDOM(photographer) {
     div.classList.add("photograph-header");
 
     const photographerHeader = `
-        <h1>${photographer.name}</h1>
+        <h2>${photographer.name}</h2>
         <p>${photographer.tagline}</p>
         <p>${photographer.city}, ${photographer.country}</p>
         <button class="contact_button modal_buttons" airia-label="Contacter photographe" aria-haspopup="dialog" aria-controls="dialog">Contactez-moi</button>

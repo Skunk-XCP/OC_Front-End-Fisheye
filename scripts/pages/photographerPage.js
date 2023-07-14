@@ -48,7 +48,7 @@ function displayMediaPhotographer(mediaPhotographer, photographerId) {
             // Génère l'élément DOM pour le média à l'aide de la fonction getMediaCardDOM
             const mediaGallery = getMediaCardDOM(media);
             mediaSection.appendChild(mediaGallery);
-            // initLightbox(mediaGallery, media, mediaPhotographer, index);
+            initLightbox(mediaGallery, media, mediaPhotographer, index);
         });
     };
 

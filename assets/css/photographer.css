@@ -202,7 +202,7 @@ form textarea {
     width: 100%;
     padding: 0;
     transition: max-height 0.3s ease;
-    max-height: 69px; /* hauteur du bouton popularFilter */
+    max-height: 69px;
     overflow: hidden;
 }
 
@@ -239,7 +239,7 @@ form textarea {
     margin-left: 25px;
 }
 
-/* pour masquer les autres éléments de la liste par défaut */
+/* pour masquer les autres boutons de la liste par défaut */
 .filtersUl li:nth-child(n+2) {
     max-height: 0;
     overflow: hidden;
@@ -247,9 +247,9 @@ form textarea {
     transition: max-height 0.3s ease, opacity 0.3s ease;
 }
 
-/* pour afficher les autres éléments de la liste lors de l'expansion */
+/* pour afficher les autres boutons de la liste lors de l'expansion */
 .filtersUl.expanded {
-    max-height: 207px; /* 3 x hauteur des boutons (69px x 3) */
+    max-height: 207px; 
 }
 
 .filtersUl li:nth-child(1) button.expanded {
@@ -333,18 +333,25 @@ form textarea {
     position: fixed;
     width: 100vw;
     height: 100vh;
-    background-color: #493304;
+    background-color: #fff;
     top: 0;
     left: 0;
+
     z-index: 20;
+}
+
+.lightbox-active {
+    cursor: default;
 }
 
 .closeLightbox {
     position: absolute;
-    top: 7%;
-    right: -5%;
+    top: 0;
+    right: -8%;
+    padding: 40px;
     font-size: 2em;
     color: #901C1C;
+    cursor: pointer;
     z-index: 30;
 }
 
@@ -352,38 +359,102 @@ form textarea {
     position: absolute;
     left: 50%;
     transform: translateX(-50%) ;
-    width: 1242px;
-    height: 900px;
-    background-color: pink;
+    margin-top: 2%;
+    /* width: 1242px; */
+    width: 70%;
+    /* height: 900px; */
+    height: 85%;
 }
 
 .lightboxContent > a > img, 
 .lightboxContent > a > video {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
 }
 
 .prev {
-    position: absolute;
-    left: -5%;
-    top: 50%;
-    transform: translateY(-50%) ;
-    color: #901C1C;
-    font-size: 2em;
+    left: -8%;
 }
 
 .next {
+    right: -8%;
+}
+
+.next, .prev {
     position: absolute;
-    right: -5%;
     top: 50%;
     transform: translateY(-50%) ;
     color: #901C1C;
     font-size: 2em;
+    padding: 250px 40px;
+    cursor: pointer;
 }
 
 .lightboxTitle {
     color: #901C1C;
     font-size: 2em;
     margin: 0;
+}
+
+@media (max-width: 1024px) {
+    .photograph-header h2 {
+        font-size: 2.5em;
+    }
+
+    .modal_buttons {
+        font-size: 1em;
+        width: 150px;
+        height: 60px;
+    }
+
+    .photograph-header img {
+        width: 250px;
+    }
+
+    .media-gallery {
+        grid-gap: 70px;
+    }
+
+    .infosMedia {
+        font-size: 1em;
+    } 
+
+    .infosMedia p span {
+        white-space: nowrap;
+    }
+
+    .infosMedia p:nth-child(2) {
+        width: 60px;
+        text-align: right;
+        background-color: pink;
+    } 
+
+    .likes-price {
+        font-size: 1.1em;
+        width: 276px;
+        height: 69px;
+    }
+
+    .likes-price p {
+        margin-top: 25px;
+    }
+
+    .lightboxTitle {
+        font-size: 1.5em;
+    }
+
+    .closeLightbox {
+        right: -15%;
+        top: -20px;
+    }
+
+    .prev {
+        left: -15%;
+
+    }
+    
+    .next {
+        right: -15%;
+    }
 }
