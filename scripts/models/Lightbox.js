@@ -13,13 +13,34 @@ class Lightbox {
         let nextButton = this.lightboxElement.querySelector('.next');
         nextButton.addEventListener('click', this.goToNext.bind(this));
 
+        // Media suivant avec fleche
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') {
+                this.goToNext();
+            }
+        });
+
         // Media précédent
         let prevButton = this.lightboxElement.querySelector('.prev');
         prevButton.addEventListener('click', this.goToPrev.bind(this));
 
+        // Media précédent avec fleche
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') {
+                this.goToPrev();
+            }
+        });
+
         // Fermeture lightbox
         let closeLightbox = this.lightboxElement.querySelector('.closeLightbox');
         closeLightbox.addEventListener('click', this.close.bind(this));
+        
+        // Fermeture lightbox avec Echap
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                this.close();
+            }
+        });
 
         // Annule le cursor pointer au survole de l'image
         let lightboxContent = this.lightboxElement.querySelector('.lightboxContent a');
@@ -56,7 +77,8 @@ class Lightbox {
     }
 
     close() {
-        this.lightboxElement.style.display = 'none';
+        // supprime la lightbox du DOM
+        this.lightboxElement.remove(); 
         document.body.classList.remove('lightbox-active');
     }
 

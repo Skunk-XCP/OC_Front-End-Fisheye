@@ -9,7 +9,7 @@ function getUserCardDOM(photographer) {
         </a>
         <p>${photographer.city}, ${photographer.country}</p>
         <p>${photographer.tagline}</p>
-        <p>${photographer.price}/jour</p>
+        <p>${photographer.price}€/jour</p>
     `;
 
     article.innerHTML = photographerCard;
@@ -32,7 +32,3 @@ function getPhotographerDOM(photographer) {
     div.innerHTML = photographerHeader;
     return div;
 }
-
-
-
-

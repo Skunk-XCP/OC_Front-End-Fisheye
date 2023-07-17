@@ -183,6 +183,7 @@ form textarea {
     width: 180px;
     position: absolute;
     left: 90px;
+    
 }
 
 .chevronFilter {
@@ -260,6 +261,20 @@ form textarea {
     max-height: 69px;
     opacity: 1;
 }
+
+.filtersUl.lines li:first-child::after,
+.filtersUl.lines li:last-child::before {
+    content: "";
+    display: block;
+    height: 2px;
+    width: 80%;
+    background: blue;
+
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
 
 .media-gallery {
     display: grid;

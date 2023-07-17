@@ -73,19 +73,30 @@ function displayMediaPhotographer(mediaPhotographer, photographerId) {
     displaySortedMedia(photographerMedia);
 }
 
-// Ouverture de la lightbox
 function initLightbox(mediaElement, media, medias, index) {
-    mediaElement.addEventListener('click', (e) => {
+    let linkElement = mediaElement.querySelector('a');
+
+    linkElement.addEventListener('click', (e) => {
         e.preventDefault();
-
-        let lightboxInnerHtml = getLightbox(media);
-        document.body.appendChild(lightboxInnerHtml);
-
-        let lightboxElement = document.querySelector(`#lightbox`);
-        let lightbox = new Lightbox(lightboxElement, medias, media, index);
-
-        lightbox.show();
+        openLightbox(media, medias, index);
     });
+
+    linkElement.addEventListener('keydown', (e) => {
+        if (e.key === "Enter") {
+            e.preventDefault();
+            openLightbox(media, medias, index);
+        }
+    });
+}
+
+function openLightbox(media, medias, index) {
+    let lightboxInnerHtml = getLightbox(media);
+    document.body.appendChild(lightboxInnerHtml);
+
+    let lightboxElement = document.querySelector('#lightbox');
+    let lightbox = new Lightbox(lightboxElement, medias, media, index);
+
+    lightbox.show();
 }
 
 // Fonction incrémentation like image et total
