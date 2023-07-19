@@ -3,19 +3,24 @@ main.setAttribute("aria-hidden", "false");
 let contactButton = document.querySelector('.contact_button');
 const contactModal = document.getElementById('contact_modal');
 const closeBtn = document.querySelector('.closeBtn');
+let focusTrap = null;
 
 
 // Fonction pour afficher la modal
 function openModal() {
   contactModal.style.display = 'block';
   contactButton.style.display = 'none'
+  document.querySelector('.closeBtn').focus();
   main.setAttribute("aria-hidden", "true");
+  focusTrap = trapFocusIn(contactModal);
 }
 
 // Fonction pour masquer la modal
 function closeModal() {
   contactModal.style.display = 'none';
   contactButton.style.display = 'block'
+  contactModal.removeEventListener('keydown', focusTrap);
+  focusTrap = null;
 }
 
 // On ajoute un écouteur d'événement à un élément (brut) du HTML
@@ -30,6 +35,11 @@ main.addEventListener('click', (e) => {
 })
 
 closeBtn.addEventListener('click', closeModal);
+contactModal.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    closeModal();
+}
+});
 
 const formElement = document.querySelector('form');
 

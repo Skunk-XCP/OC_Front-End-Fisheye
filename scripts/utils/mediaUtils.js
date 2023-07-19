@@ -36,10 +36,10 @@ function getLightbox(media) {
 
 function generateInnerHtmlLightBox(media) {
     return  `<div class="lightboxContent">
-    <span class="closeLightbox" aria-label="Bouton fermeture modal"><i class="fas fa-times"></i></span>
     <a href="${media.getPath()}" title="ouvrir le media">
-        ${media.getTypeOfMedia()}
+    ${media.getTypeOfMedia()}
     </a>
+    <button class="closeLightbox" aria-label="Bouton fermeture modal"><i class="fas fa-times"></i></button>
     <p class="lightboxTitle">${media.title}</p>
     <span class="prev" aria-label="Bouton media précédent"><i class="fas fa-angle-left"></i></span>
     <span class="next" aria-label="Bouton media suivant"><i class="fas fa-angle-right"></i></span>
@@ -56,9 +56,9 @@ function filters() {
         <div class="filtersContainer">
             <i class="fa-solid fa-chevron-up chevronFilter"></i>
             <ul class="filtersUl">
-                <li><button class="popularFilter">Popularité<span></span></button></li>
-                <li><button class="dateFilter">Date</button></li>
-                <li><button class="titleFilter">Titre</button></li>
+                <li><button id="popularFilter"><span>Popularité</span></button></li>
+                <li><button id="dateFilter"><span>Date</span></button></li>
+                <li><button id="titleFilter"><span>Titre</span></button></li>
             </ul>
         </div>
     `;

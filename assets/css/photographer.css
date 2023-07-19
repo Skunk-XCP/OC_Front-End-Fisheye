@@ -102,12 +102,14 @@
     width: 100%;
 }
 
-.modal header img {
+.modal header button {
     position: absolute;
     right: 35px;
     top: 35px;
-    width: 30px;
+    width: 55px;
     cursor: pointer;
+    border: none;
+    background: unset;
 }
 
 .modal header h2 {
@@ -179,19 +181,94 @@ form textarea {
     font-weight: bold;
 }
 
-.filtersContainer {
-    width: 180px;
+/* .filtersContainer {
     position: absolute;
     left: 90px;
+    width: 180px;
+    height: 204px;
+
+    background-color: #901C1C;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
     
+} */
+
+/* .chevronFilter {
+    position: absolute;
+    padding: 20px;
+    top: 8px;
+    right: 10px;
+    color: white;
+    transition: transform 0.3s ease;
+} */
+
+/* .chevronFilter.rotated {
+    transform: rotate(180deg);
+} */
+
+/* .filtersUl {
+    width: 100%;
+    padding: 0;
+} */
+
+/* .filtersUl li {
+    list-style: none;
+} */
+
+/* .filters button {
+    background: unset;
+    width: 100%;
+    color: white;
+    font-size: 1.1em;
+    text-align: start;
+    border: none;
+    cursor: pointer;
+    padding: 15px 0;
+} */
+
+/* .filters button:hover {
+    background-color: #DB8876;
+    color: black;
+} */
+
+/* pour afficher les autres boutons de la liste lors de l'expansion */
+/* .filtersContainer.expanded {
+    max-height: 204px; 
+} */
+
+
+
+
+/* Sort Button */
+
+.filtersContainer {
+    position: absolute;
+    left: 90px;
+    width: 180px;
+    height: 69px;
+    background-color: #901C1C;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    overflow: hidden; /* Pour masquer les éléments excédentaires */
+    transition: height 0.3s ease; /* Pour animer la transition */
 }
+
+.filtersContainer.expanded {
+    height: 207px; /* 3 fois la hauteur originale */
+}
+
 
 .chevronFilter {
     position: absolute;
-    padding: 20px 20px 20px 20px;
-    top: 20px;
+    padding: 20px;
+    top: 0; 
     right: 10px;
     color: white;
+    rotate: 180deg;
     transition: transform 0.3s ease;
 }
 
@@ -203,78 +280,61 @@ form textarea {
     width: 100%;
     padding: 0;
     transition: max-height 0.3s ease;
-    max-height: 69px;
-    overflow: hidden;
+    max-height: 69px; /* Devrait correspondre à la hauteur initiale de filtersContainer */
+    overflow: hidden; /* Pour masquer les éléments excédentaires */
+}
+
+.filtersUl.expanded {
+    max-height: none; /* Pour permettre aux éléments intérieurs de prendre toute la place disponible */
 }
 
 .filtersUl li {
-    list-style: none;
+    height: 69px;
+    display: none; /* Cache tous les éléments sauf le premier */
 }
 
-.filters button {
-    background-color: #901C1C;
-    width: 100%;
-    list-style: none;
+.filtersUl li:first-child {
+    display: block; /* Affiche uniquement le premier élément */
+}
+
+.filtersUl li button {
+    background: unset;
     color: white;
     font-size: 1.1em;
-    height: 68px;
-    text-align: start;
     border: none;
     cursor: pointer;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.filtersUl li:nth-child(1) button {
-    border-radius: 5px;
-}
-
-.filtersUl li:nth-child(3) button {
-    border-radius: 0 0 5px 5px;
-}
-
-.filtersUl button:hover {
+.filtersUl li button:hover {
     background-color: #DB8876;
     color: black;
 }
 
-.filtersUl button span {
-    margin-left: 25px;
+.filtersUl li button span {
+    padding: 10px;
 }
 
-/* pour masquer les autres boutons de la liste par défaut */
-.filtersUl li:nth-child(n+2) {
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    transition: max-height 0.3s ease, opacity 0.3s ease;
-}
-
-/* pour afficher les autres boutons de la liste lors de l'expansion */
-.filtersUl.expanded {
-    max-height: 207px; 
-}
-
-.filtersUl li:nth-child(1) button.expanded {
-    border-radius: 5px 5px 0 0;
-}
-
-.filtersUl.expanded li:nth-child(n+2) {
-    max-height: 69px;
-    opacity: 1;
-}
-
-.filtersUl.lines li:first-child::after,
-.filtersUl.lines li:last-child::before {
+.filtersUl.expanded.lines li:first-child::after,
+.filtersUl.expanded.lines li:last-child::before {
     content: "";
     display: block;
     height: 2px;
     width: 80%;
-    background: blue;
+    background: white;
 
     position: relative;
     left: 50%;
     transform: translateX(-50%);
 }
 
+/* Media Gallery */
 
 .media-gallery {
     display: grid;
@@ -375,9 +435,7 @@ form textarea {
     left: 50%;
     transform: translateX(-50%) ;
     margin-top: 2%;
-    /* width: 1242px; */
     width: 70%;
-    /* height: 900px; */
     height: 85%;
 }
 

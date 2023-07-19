@@ -11,7 +11,7 @@ async function dataPhotographer(file) {
 // rappel sur chaque élément photographer.
 // La fonction de rappel vérifie si l'identifiant de l'élément correspond à 
 // l'identifiant fourni en paramètre.
-const findPhotographer = (photographers, id) => {
+function findPhotographer(photographers, id) {
     const photographer = photographers.find(photographer => photographer.id === id);
     return photographer;
 };
@@ -25,7 +25,7 @@ function headerPhotographer(photographer) {
 };
 
 // Recherche des medias
-const getMediaPhotographer = (id, media) => {
+function getMediaPhotographer(id, media) {
     const mediaByPhotographer = media.filter(media => media.photographerId === id);
     return mediaByPhotographer;
 };
@@ -53,21 +53,27 @@ function displayMediaPhotographer(mediaPhotographer, photographerId) {
     };
 
     document.addEventListener('click', (e) => {
-        let sortedMedia;
-
-        if (e.target.classList.contains('popularFilter')) {
-            // Copiez le tableau en utilisant le spread operator, 
-            sortedMedia = [...photographerMedia].sort((a, b) => b._likes - a._likes);
-        } else if (e.target.classList.contains('dateFilter')) {
-            sortedMedia = [...photographerMedia].sort((a, b) => new Date(b.date) - new Date(a.date));
-        } else if (e.target.classList.contains('titleFilter')) {
-            sortedMedia = [...photographerMedia].sort((a, b) => a._title.localeCompare(b._title));
-        }
-
-        if (sortedMedia) {
-            displaySortedMedia(sortedMedia);
-        }
+        const filterButtons = ['popularFilter', 'dateFilter', 'titleFilter'];
+    
+        // Parcourir chaque bouton de filtre pour voir si l'un d'eux a déclenché l'événement click
+        filterButtons.forEach((buttonId) => {
+            if (e.target.closest(`#${buttonId}`)) { // Utilisez .closest pour vous assurer que le click sur le span à l'intérieur du button est également capturé
+                let sortedMedia;
+                if (buttonId === 'popularFilter') {
+                    sortedMedia = [...photographerMedia].sort((a, b) => b._likes - a._likes);
+                } else if (buttonId === 'dateFilter') {
+                    sortedMedia = [...photographerMedia].sort((a, b) => new Date(b.date) - new Date(a.date));
+                } else if (buttonId === 'titleFilter') {
+                    sortedMedia = [...photographerMedia].sort((a, b) => a._title.localeCompare(b._title));
+                }
+    
+                if (sortedMedia) {
+                    displaySortedMedia(sortedMedia);
+                }
+            }
+        });
     });
+    
 
     // Affichage de la gallerie 
     displaySortedMedia(photographerMedia);
@@ -164,16 +170,16 @@ async function init() {
     main.appendChild(filterModule);
 
     displayMediaPhotographer(photographer.medias, photographerId);
-
+    
     const displayLikesAndPrice = getLikesAndPrice(photographer);
     main.appendChild(displayLikesAndPrice);
-
+    
     const spanTotalLikes = document.querySelector('.totalLikeNumber');
     spanTotalLikes.innerHTML = `
     <span class="totalLikeNumber" aria-label="total de likes">${totalLikes}</span> 
     `;
-
-    // sortByPopularity(photographer.medias, photographerId);
+    
+    // sortByPopularity(photographer.medias, photographerId); !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     incrementLikes(totalLikes);
 
 }

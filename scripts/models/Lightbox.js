@@ -8,6 +8,7 @@ class Lightbox {
 
     show() {
         this.lightboxElement.style.display = 'block';
+        document.querySelector(".lightboxContent a").focus();
 
         // Media suivant
         let nextButton = this.lightboxElement.querySelector('.next');
@@ -41,6 +42,8 @@ class Lightbox {
                 this.close();
             }
         });
+
+        trapFocusIn(this.lightboxElement);
 
         // Annule le cursor pointer au survole de l'image
         let lightboxContent = this.lightboxElement.querySelector('.lightboxContent a');
@@ -80,6 +83,8 @@ class Lightbox {
         // supprime la lightbox du DOM
         this.lightboxElement.remove(); 
         document.body.classList.remove('lightbox-active');
+
+        this.lightboxElement.removeEventListener('keydown', this.trapFocusIn);
     }
 
     updateContent() {
