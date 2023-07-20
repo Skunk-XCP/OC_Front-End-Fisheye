@@ -68,7 +68,6 @@ function filters() {
     return div;
 }
 
-// Code dans le mediaUtils
 // Fonction affichage total des likes + prix
 function getLikesAndPrice(photographer) {
 

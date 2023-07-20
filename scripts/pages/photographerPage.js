@@ -170,7 +170,6 @@ async function init() {
     const displayLikesAndPrice = getLikesAndPrice(photographer);
     main.appendChild(displayLikesAndPrice);
     
-    // code dans le init de photographerPage
     const spanTotalLikes = document.querySelector('.totalLikeNumber');
     spanTotalLikes.innerHTML = `
     <span class="totalLikeNumber" aria-label="total de likes">${totalLikes}</span> 

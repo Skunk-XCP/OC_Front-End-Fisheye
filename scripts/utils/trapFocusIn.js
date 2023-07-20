@@ -2,6 +2,14 @@ function trapFocusIn(modal) {
     const handler = function (e) {
   
         let isTabPressed = e.key === "Tab";
+        let isArrowRightPressed = e.key === "ArrowRight";
+        let isArrowLeftPressed = e.key === "ArrowLeft";
+  
+        // Permet d'éviter le conflit avec les fleches qui
+        // empechait la navigation dans la Lightbox avec celles-ci
+        if (!isTabPressed || isArrowRightPressed || isArrowLeftPressed) {
+            return;
+        }
   
         if (!isTabPressed) {
             return;
