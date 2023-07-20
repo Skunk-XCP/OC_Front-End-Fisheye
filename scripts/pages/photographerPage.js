@@ -41,44 +41,38 @@ function displayMediaPhotographer(mediaPhotographer, photographerId) {
 
     // Affiche les médias triés
     const displaySortedMedia = (sortedMedia) => {
-        // Vide le contenu existant dans mediaSection
         mediaSection.innerHTML = '';
-         // Pour chaque élément dans le tableau de médias triés
         sortedMedia.forEach((media, index) => {
-            // Génère l'élément DOM pour le média à l'aide de la fonction getMediaCardDOM
             const mediaGallery = getMediaCardDOM(media);
             mediaSection.appendChild(mediaGallery);
             initLightbox(mediaGallery, media, mediaPhotographer, index);
         });
     };
 
-    document.addEventListener('click', (e) => {
-        const filterButtons = ['popularFilter', 'dateFilter', 'titleFilter'];
-    
-        // Parcourir chaque bouton de filtre pour voir si l'un d'eux a déclenché l'événement click
-        filterButtons.forEach((buttonId) => {
-            if (e.target.closest(`#${buttonId}`)) { // Utilisez .closest pour vous assurer que le click sur le span à l'intérieur du button est également capturé
-                let sortedMedia;
-                if (buttonId === 'popularFilter') {
-                    sortedMedia = [...photographerMedia].sort((a, b) => b._likes - a._likes);
-                } else if (buttonId === 'dateFilter') {
-                    sortedMedia = [...photographerMedia].sort((a, b) => new Date(b.date) - new Date(a.date));
-                } else if (buttonId === 'titleFilter') {
-                    sortedMedia = [...photographerMedia].sort((a, b) => a._title.localeCompare(b._title));
-                }
-    
-                if (sortedMedia) {
-                    displaySortedMedia(sortedMedia);
-                }
-            }
-        });
+    // Ecouteur d'événement pour 'popularFilter'
+    document.querySelector('#popularFilter').addEventListener('click', () => {
+        const sortedMedia = [...photographerMedia].sort((a, b) => b._likes - a._likes);
+        displaySortedMedia(sortedMedia);
     });
-    
 
-    // Affichage de la gallerie 
+    // Ecouteur d'événement pour 'dateFilter'
+    document.querySelector('#dateFilter').addEventListener('click', () => {
+        const sortedMedia = [...photographerMedia].sort((a, b) => new Date(b.date) - new Date(a.date));
+        displaySortedMedia(sortedMedia);
+    });
+
+    // Ecouteur d'événement pour 'titleFilter'
+    document.querySelector('#titleFilter').addEventListener('click', () => {
+        const sortedMedia = [...photographerMedia].sort((a, b) => a._title.localeCompare(b._title));
+        displaySortedMedia(sortedMedia);
+    });
+
     displaySortedMedia(photographerMedia);
 }
 
+
+
+// Initialisation de la lightbox
 function initLightbox(mediaElement, media, medias, index) {
     let linkElement = mediaElement.querySelector('a');
 
@@ -95,6 +89,7 @@ function initLightbox(mediaElement, media, medias, index) {
     });
 }
 
+// Ouverture de la lightbox
 function openLightbox(media, medias, index) {
     let lightboxInnerHtml = getLightbox(media);
     document.body.appendChild(lightboxInnerHtml);
@@ -155,8 +150,9 @@ async function init() {
 
 
     const allLikes = mediaPhotographer.map(medias => medias.likes);
-
     const totalLikes = allLikes.reduce((a, b) => a + b, 0)
+
+    
 
     const allMedias = mediaPhotographer.map(media => new TypeMediaFactory(media));
     photographer.medias = allMedias;
@@ -174,14 +170,13 @@ async function init() {
     const displayLikesAndPrice = getLikesAndPrice(photographer);
     main.appendChild(displayLikesAndPrice);
     
+    // code dans le init de photographerPage
     const spanTotalLikes = document.querySelector('.totalLikeNumber');
     spanTotalLikes.innerHTML = `
     <span class="totalLikeNumber" aria-label="total de likes">${totalLikes}</span> 
     `;
     
-    // sortByPopularity(photographer.medias, photographerId); !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     incrementLikes(totalLikes);
-
 }
 
 init();
