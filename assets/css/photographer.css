@@ -374,6 +374,19 @@ form textarea {
     cursor: pointer;
 }
 
+.media-figure-figcaption-btn {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+}
+
+.media-figure-figcaption-btn i {
+    cursor: pointer;
+    color: #901C1C;
+}
+
 .likes-price {
     position: fixed;
     border-radius: 5px 5px 0 0;
@@ -461,6 +474,8 @@ form textarea {
     top: 50%;
     transform: translateY(-50%) ;
     color: #901C1C;
+    background: unset;
+    border: none;
     font-size: 2em;
     padding: 250px 40px;
     cursor: pointer;

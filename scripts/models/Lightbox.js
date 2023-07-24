@@ -14,34 +14,28 @@ class Lightbox {
         let nextButton = this.lightboxElement.querySelector('.next');
         nextButton.addEventListener('click', this.goToNext.bind(this));
 
-        // Media suivant avec fleche
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight') {
-                this.goToNext();
-            }
-        });
-
         // Media précédent
         let prevButton = this.lightboxElement.querySelector('.prev');
         prevButton.addEventListener('click', this.goToPrev.bind(this));
 
-        // Media précédent avec fleche
+        // Navigation au clavier
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowLeft') {
+            e.stopPropagation();
+            if (e.key === 'ArrowRight') {
+                // Media suivant avec fleche
+                this.goToNext();
+            } else if (e.key === 'ArrowLeft') {
+                // Media précédent avec fleche
                 this.goToPrev();
+            } else if (e.key === 'Escape') {
+                // Fermeture lightbox avec Echap
+                this.close();
             }
         });
 
         // Fermeture lightbox
         let closeLightbox = this.lightboxElement.querySelector('.closeLightbox');
         closeLightbox.addEventListener('click', this.close.bind(this));
-        
-        // Fermeture lightbox avec Echap
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                this.close();
-            }
-        });
 
         trapFocusIn(this.lightboxElement);
 
@@ -51,18 +45,18 @@ class Lightbox {
 
         // Evite d'ouvrir l'image dans un onglet au clic dans la lightbox
         let lightboxLink = this.lightboxElement.querySelector('.lightboxContent a');
-            lightboxLink.addEventListener('click', function(event){
+        lightboxLink.addEventListener('click', function (event) {
             event.preventDefault();
         });
     }
 
     goToNext() {
         this.currentElement++;
-    
+
         if (this.currentElement >= this.galleryElements.length) {
             this.currentElement = 0;
         }
-        
+
         this.mediaPhotographer = this.galleryElements[this.currentElement];
         this.updateContent();
 
@@ -70,18 +64,18 @@ class Lightbox {
 
     goToPrev() {
         this.currentElement--;
-    
+
         if (this.currentElement < 0) {
             this.currentElement = this.galleryElements.length - 1;
         }
-    
+
         this.mediaPhotographer = this.galleryElements[this.currentElement];
         this.updateContent();
     }
 
     close() {
         // supprime la lightbox du DOM
-        this.lightboxElement.remove(); 
+        this.lightboxElement.remove();
         document.body.classList.remove('lightbox-active');
 
         this.lightboxElement.removeEventListener('keydown', this.trapFocusIn);

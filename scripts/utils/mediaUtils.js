@@ -11,16 +11,17 @@ function getMediaCardDOM(media) {
         </a>
         <div class="infosMedia">
             <p>${media.title}</p>
-            <p>
-                <span class="likeNumber">${media.likes}</span> 
-                <span><i class="fa-solid fa-heart likeLogo" aria-label="Coeur, Cliquez ici pour aimer"></i><span>
-            </p>
+            <button
+                id="like-${media.id}"
+                class="media-figure-figcaption-btn"
+                aria-label="Ajouter un like au media : ${media.title}">
+                <span id="nbr-likes-${media.id}" class="nbr-likes">${media.likes}</span> <i class="fa-regular fa-heart like-icon"></i>
+            </button>
         </div>
     </div>
     `;
 
     article.innerHTML = mediaCard;
-
     return article;
 }
 
@@ -39,10 +40,10 @@ function generateInnerHtmlLightBox(media) {
     <a href="${media.getPath()}" title="ouvrir le media">
     ${media.getTypeOfMedia()}
     </a>
-    <button class="closeLightbox" aria-label="Bouton fermeture modal"><i class="fas fa-times"></i></button>
+    <button class="closeLightbox" aria-label="Fermeture modal"><i class="fas fa-times"></i></button>
     <p class="lightboxTitle">${media.title}</p>
-    <span class="prev" aria-label="Bouton media précédent"><i class="fas fa-angle-left"></i></span>
-    <span class="next" aria-label="Bouton media suivant"><i class="fas fa-angle-right"></i></span>
+    <button class="prev"><span  aria-label="Media précédent"><i class="fas fa-angle-left"></i></span></button>
+    <button class="next"><span  aria-label="Media suivant"><i class="fas fa-angle-right"></i></span></button>
 </div>
 `
 }
@@ -50,15 +51,16 @@ function generateInnerHtmlLightBox(media) {
 function filters() {
     const div = document.createElement('div');
     div.classList.add('filters');
+    div.setAttribute('type', 'menubar')
 
     const filter = `
         <p>Trier par </p>
         <div class="filtersContainer">
             <i class="fa-solid fa-chevron-up chevronFilter"></i>
             <ul class="filtersUl">
-                <li><button id="popularFilter"><span>Popularité</span></button></li>
-                <li><button id="dateFilter"><span>Date</span></button></li>
-                <li><button id="titleFilter"><span>Titre</span></button></li>
+                <li><button type="menuitem" id="popularFilter"><span>Popularité</span></button></li>
+                <li><button type="menuitem" id="dateFilter"><span>Date</span></button></li>
+                <li><button type="menuitem" id="titleFilter"><span>Titre</span></button></li>
             </ul>
         </div>
     `;

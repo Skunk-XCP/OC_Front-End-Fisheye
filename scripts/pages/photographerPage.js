@@ -44,33 +44,42 @@ function displayMediaPhotographer(mediaPhotographer, photographerId) {
         mediaSection.innerHTML = '';
         sortedMedia.forEach((media, index) => {
             const mediaGallery = getMediaCardDOM(media);
+
+            // Obtention du lien à l'intérieur de mediaGallery
+            const mediaLink = mediaGallery.querySelector('a');
+
+            // Ajout de la propriété tabindex pour rendre le lien focalisable
+            mediaLink.setAttribute('tabindex', '0');
+
             mediaSection.appendChild(mediaGallery);
             initLightbox(mediaGallery, media, mediaPhotographer, index);
+            // bindLikeButton(media.id);
         });
     };
 
     // Ecouteur d'événement pour 'popularFilter'
     document.querySelector('#popularFilter').addEventListener('click', () => {
         const sortedMedia = [...photographerMedia].sort((a, b) => b._likes - a._likes);
+
         displaySortedMedia(sortedMedia);
     });
 
     // Ecouteur d'événement pour 'dateFilter'
     document.querySelector('#dateFilter').addEventListener('click', () => {
         const sortedMedia = [...photographerMedia].sort((a, b) => new Date(b.date) - new Date(a.date));
+
         displaySortedMedia(sortedMedia);
     });
 
     // Ecouteur d'événement pour 'titleFilter'
     document.querySelector('#titleFilter').addEventListener('click', () => {
         const sortedMedia = [...photographerMedia].sort((a, b) => a._title.localeCompare(b._title));
+
         displaySortedMedia(sortedMedia);
     });
 
     displaySortedMedia(photographerMedia);
 }
-
-
 
 // Initialisation de la lightbox
 function initLightbox(mediaElement, media, medias, index) {
@@ -101,32 +110,69 @@ function openLightbox(media, medias, index) {
 }
 
 // Fonction incrémentation like image et total
-function incrementLikes(totalLikes) {
+// function incrementLikes(totalLikes) {
 
-    const likeNumberElement = document.querySelectorAll('.likeNumber');
-    const likeButton = document.querySelectorAll('.likeLogo');
-    const spanTotalLikes = document.querySelector('.totalLikeNumber');
+//     const likeNumberElement = document.querySelectorAll('.likeNumber');
+//     const likeButton = document.querySelectorAll('.likeLogo');
 
-    likeButton.forEach((heart, index) => {
-        heart.addEventListener('click', () => {
-            if (!heart.classList.contains('clicked')) {
-                likeNumberElement[index].innerHTML++
-                heart.classList.add('clicked')
-                totalLikes++
-                spanTotalLikes.innerHTML = `
-                <span class="totalLikeNumber" aria-label="total de likes">${totalLikes}</span> 
-                `;
-            } else {
-                likeNumberElement[index].innerHTML--
-                heart.classList.remove('clicked')
-                totalLikes--
-                spanTotalLikes.innerHTML = `
-                <span class="totalLikeNumber" aria-label="total de likes">${totalLikes}</span> 
-                `;
-            }
-        })
-    })
+//     likeButton.forEach((heart, index) => {
+//         heart.addEventListener('click', () => {
+//             if (!heart.classList.contains('clicked')) {
+//                 likeNumberElement[index].innerHTML++
+//                 heart.classList.add('clicked')
+//                 totalLikes++
+//                 updateTotalLikes(totalLikes);
+//             } else {
+//                 likeNumberElement[index].innerHTML--
+//                 heart.classList.remove('clicked')
+//                 totalLikes--
+//                 updateTotalLikes(totalLikes);
+//             }
+//         })
+//     })
+// }
+
+
+function bindLikeButton(id) {
+    const mediaLikeBtn = document.getElementById(`like-${media.id}`);
+    mediaLikeBtn.addEventListener('click', () => {
+        incrementLikes(id);
+    });
 }
+
+function incrementLikes(id) {
+    // je transforme l'id en nombre
+    const parseId = parseInt(id)
+    // je recupere l'element html button pour le like de mon media
+    const likeBtn = document.getElementById(`like-${id}`);
+    // je recupere l'element html contenant le total des likes
+    const spanTotalLikes = document.getElementById('total-likes');
+    // je recupere le total de likes de la page
+    let totalLikes = parseInt(spanTotalLikes.innerText);
+    // je recupere l'element html span dans lequel il y a le nbre de likes de mon media
+    const spanNbrLikes = document.getElementById(`nbr-likes-${id}`);
+    // je recupere la valeur du span en integer
+    let nbrLikesMedia = parseInt(spanNbrLikes.innerText);
+
+
+    if (!likeBtn.classList.contains('clicked')) {
+        spanNbrLikes.innerHTML = nbrLikesMedia + 1;
+        likeBtn.classList.add('clicked')
+        spanTotalLikes.innerHTML = totalLikes + 1;
+    } else {
+        spanNbrLikes.innerHTML = nbrLikesMedia - 1;
+        likeBtn.classList.remove('clicked')
+        spanTotalLikes.innerHTML = totalLikes - 1;
+    }
+}
+
+function updateTotalLikes(totalLikes) {
+    const spanTotalLikes = document.querySelector('.totalLikeNumber');
+    spanTotalLikes.innerHTML = `
+        <span class="totalLikeNumber" aria-label="total de likes">${totalLikes}</span> 
+    `;
+}
+
 
 
 async function init() {
@@ -148,11 +194,9 @@ async function init() {
     mediaPhotographer = getMediaPhotographer(photographerId, medias);
     photographer.medias = mediaPhotographer;
 
-
-    const allLikes = mediaPhotographer.map(medias => medias.likes);
-    const totalLikes = allLikes.reduce((a, b) => a + b, 0)
-
-    
+    window.addEventListener('keydown', function (event) {
+        console.log(`Pressed key: ${event.key}`);
+    });
 
     const allMedias = mediaPhotographer.map(media => new TypeMediaFactory(media));
     photographer.medias = allMedias;
@@ -166,16 +210,16 @@ async function init() {
     main.appendChild(filterModule);
 
     displayMediaPhotographer(photographer.medias, photographerId);
-    
+
     const displayLikesAndPrice = getLikesAndPrice(photographer);
     main.appendChild(displayLikesAndPrice);
-    
-    const spanTotalLikes = document.querySelector('.totalLikeNumber');
-    spanTotalLikes.innerHTML = `
-    <span class="totalLikeNumber" aria-label="total de likes">${totalLikes}</span> 
-    `;
-    
-    incrementLikes(totalLikes);
+
+    // const allLikes = mediaPhotographer.map(medias => medias.likes);
+    // const totalLikes = allLikes.reduce((a, b) => a + b, 0)
+
+    // updateTotalLikes(totalLikes);
+
+    // incrementLikes(totalLikes);
 }
 
 init();
