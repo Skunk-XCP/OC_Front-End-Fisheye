@@ -53,7 +53,7 @@ function displayMediaPhotographer(mediaPhotographer, photographerId) {
 
             mediaSection.appendChild(mediaGallery);
             initLightbox(mediaGallery, media, mediaPhotographer, index);
-            // bindLikeButton(media.id);
+            bindLikeButton(media.id);
         });
     };
 
@@ -134,7 +134,7 @@ function openLightbox(media, medias, index) {
 
 
 function bindLikeButton(id) {
-    const mediaLikeBtn = document.getElementById(`like-${media.id}`);
+    const mediaLikeBtn = document.getElementById(`like-${id}`);
     mediaLikeBtn.addEventListener('click', () => {
         incrementLikes(id);
     });
@@ -146,7 +146,7 @@ function incrementLikes(id) {
     // je recupere l'element html button pour le like de mon media
     const likeBtn = document.getElementById(`like-${id}`);
     // je recupere l'element html contenant le total des likes
-    const spanTotalLikes = document.getElementById('total-likes');
+    const spanTotalLikes = document.getElementById('totalLikeNumber');
     // je recupere le total de likes de la page
     let totalLikes = parseInt(spanTotalLikes.innerText);
     // je recupere l'element html span dans lequel il y a le nbre de likes de mon media
@@ -159,17 +159,23 @@ function incrementLikes(id) {
         spanNbrLikes.innerHTML = nbrLikesMedia + 1;
         likeBtn.classList.add('clicked')
         spanTotalLikes.innerHTML = totalLikes + 1;
+
+        likeBtn.querySelector('.like-icon--empty').classList.add('hidden-heart'); // Masque le coeur vide
+        likeBtn.querySelector('.like-icon--full').classList.remove('hidden-heart');
     } else {
         spanNbrLikes.innerHTML = nbrLikesMedia - 1;
         likeBtn.classList.remove('clicked')
         spanTotalLikes.innerHTML = totalLikes - 1;
+
+        likeBtn.querySelector('.like-icon--empty').classList.remove('hidden-heart'); // Affiche le coeur vide
+        likeBtn.querySelector('.like-icon--full').classList.add('hidden-heart');
     }
 }
 
 function updateTotalLikes(totalLikes) {
     const spanTotalLikes = document.querySelector('.totalLikeNumber');
     spanTotalLikes.innerHTML = `
-        <span class="totalLikeNumber" aria-label="total de likes">${totalLikes}</span> 
+        <span id="totalLikeNumber" aria-label="total de likes">${totalLikes}</span> 
     `;
 }
 
@@ -214,12 +220,10 @@ async function init() {
     const displayLikesAndPrice = getLikesAndPrice(photographer);
     main.appendChild(displayLikesAndPrice);
 
-    // const allLikes = mediaPhotographer.map(medias => medias.likes);
-    // const totalLikes = allLikes.reduce((a, b) => a + b, 0)
+    const allLikes = mediaPhotographer.map(medias => medias.likes);
+    const totalLikes = allLikes.reduce((a, b) => a + b, 0)
 
-    // updateTotalLikes(totalLikes);
-
-    // incrementLikes(totalLikes);
+    updateTotalLikes(totalLikes);
 }
 
 init();

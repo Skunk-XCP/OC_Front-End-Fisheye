@@ -15,7 +15,9 @@ function getMediaCardDOM(media) {
                 id="like-${media.id}"
                 class="media-figure-figcaption-btn"
                 aria-label="Ajouter un like au media : ${media.title}">
-                <span id="nbr-likes-${media.id}" class="nbr-likes">${media.likes}</span> <i class="fa-regular fa-heart like-icon"></i>
+                <span id="nbr-likes-${media.id}" class="nbr-likes">${media.likes}</span> 
+                <i class="fa-regular fa-heart like-icon--empty"></i>
+                <i class="fa-solid fa-heart like-icon--full hidden-heart"></i>
             </button>
         </div>
     </div>
@@ -42,8 +44,8 @@ function generateInnerHtmlLightBox(media) {
     </a>
     <button class="closeLightbox" aria-label="Fermeture modal"><i class="fas fa-times"></i></button>
     <p class="lightboxTitle">${media.title}</p>
-    <button class="prev"><span  aria-label="Media précédent"><i class="fas fa-angle-left"></i></span></button>
-    <button class="next"><span  aria-label="Media suivant"><i class="fas fa-angle-right"></i></span></button>
+    <button class="prev"><span aria-label="Media précédent"><i class="fas fa-angle-left"></i></span></button>
+    <button class="next"><span aria-label="Media suivant"><i class="fas fa-angle-right"></i></span></button>
 </div>
 `
 }
@@ -58,9 +60,9 @@ function filters() {
         <div class="filtersContainer">
             <i class="fa-solid fa-chevron-up chevronFilter"></i>
             <ul class="filtersUl">
-                <li><button type="menuitem" id="popularFilter"><span>Popularité</span></button></li>
-                <li><button type="menuitem" id="dateFilter"><span>Date</span></button></li>
-                <li><button type="menuitem" id="titleFilter"><span>Titre</span></button></li>
+                <li><button type="button" id="popularFilter"><span>Popularité</span></button></li>
+                <li><button type="button" id="dateFilter"><span>Date</span></button></li>
+                <li><button type="button" id="titleFilter"><span>Titre</span></button></li>
             </ul>
         </div>
     `;

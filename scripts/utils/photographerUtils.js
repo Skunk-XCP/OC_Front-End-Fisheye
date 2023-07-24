@@ -25,7 +25,7 @@ function getPhotographerDOM(photographer) {
         <h2>${photographer.name}</h2>
         <p>${photographer.tagline}</p>
         <p>${photographer.city}, ${photographer.country}</p>
-        <button class="contact_button modal_buttons" airia-label="Contacter photographe" aria-haspopup="dialog" aria-controls="dialog">Contactez-moi</button>
+        <button class="contact_button modal_buttons" aria-label="Contacter photographe" aria-haspopup="dialog" aria-controls="contact_modal">Contactez-moi</button>
         <img src="${photographer.portrait}" alt="Photo de ${photographer.name}">
     `;
 

@@ -370,10 +370,6 @@ form textarea {
     margin-top: 10px;
 }
 
-.infosMedia>p>span:nth-child(2) {
-    cursor: pointer;
-}
-
 .media-figure-figcaption-btn {
     background: none;
     color: inherit;
@@ -382,9 +378,13 @@ form textarea {
     font: inherit;
 }
 
-.media-figure-figcaption-btn i {
+.like-icon {
     cursor: pointer;
     color: #901C1C;
+}
+
+.hidden-heart {
+    display: none;
 }
 
 .likes-price {

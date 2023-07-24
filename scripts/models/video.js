@@ -9,7 +9,7 @@ class Video extends Media {
     }
 
     getTypeOfMedia() {
-        return `<video src="${this.getPath()}" aria-label="${this._title}" controls="true" poster=""></video>`;
+        return `<video src="${this.getPath()}" aria-label="${this._title}" controls poster=""></video>`;
     }
 
 }
