@@ -127,6 +127,7 @@
     margin: 0;
 }
 
+/* Formulaire de contact */
 form {
     display: flex;
     width: 100%;
@@ -167,6 +168,7 @@ form textarea {
     border: none;
 }
 
+/* Sort Button */
 .filters {
     margin-left: 100px;
     display: flex;
@@ -180,68 +182,6 @@ form textarea {
     margin: 40px 20px 0 0;
     font-weight: bold;
 }
-
-/* .filtersContainer {
-    position: absolute;
-    left: 90px;
-    width: 180px;
-    height: 204px;
-
-    background-color: #901C1C;
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    margin-top: 20px;
-    
-} */
-
-/* .chevronFilter {
-    position: absolute;
-    padding: 20px;
-    top: 8px;
-    right: 10px;
-    color: white;
-    transition: transform 0.3s ease;
-} */
-
-/* .chevronFilter.rotated {
-    transform: rotate(180deg);
-} */
-
-/* .filtersUl {
-    width: 100%;
-    padding: 0;
-} */
-
-/* .filtersUl li {
-    list-style: none;
-} */
-
-/* .filters button {
-    background: unset;
-    width: 100%;
-    color: white;
-    font-size: 1.1em;
-    text-align: start;
-    border: none;
-    cursor: pointer;
-    padding: 15px 0;
-} */
-
-/* .filters button:hover {
-    background-color: #DB8876;
-    color: black;
-} */
-
-/* pour afficher les autres boutons de la liste lors de l'expansion */
-/* .filtersContainer.expanded {
-    max-height: 204px; 
-} */
-
-
-
-
-/* Sort Button */
 
 .filtersContainer {
     position: absolute;
@@ -268,7 +208,9 @@ form textarea {
     top: 0; 
     right: 10px;
     color: white;
-    rotate: 180deg;
+    background: transparent;
+    border: none;
+    /* transform: rotate(180deg); */
     transition: transform 0.3s ease;
 }
 
@@ -370,6 +312,7 @@ form textarea {
     margin-top: 10px;
 }
 
+/* Bouton like */
 .media-figure-figcaption-btn {
     background: none;
     color: inherit;
@@ -417,6 +360,7 @@ form textarea {
     margin-left: 30px;
 }
 
+/* Lightbox */
 #lightbox {
     position: fixed;
     width: 100vw;
@@ -424,7 +368,6 @@ form textarea {
     background-color: #fff;
     top: 0;
     left: 0;
-
     z-index: 20;
 }
 
@@ -487,6 +430,7 @@ form textarea {
     margin: 0;
 }
 
+/* Responsive écran desktop */
 @media (max-width: 1024px) {
     .photograph-header h2 {
         font-size: 2.5em;
