@@ -14,6 +14,8 @@ function openModal() {
   contactButton.style.display = 'none'
   document.querySelector('.closeBtn').focus();
   main.setAttribute("aria-hidden", "true");
+  // Ajout de la classe 'modal-open' à l'élément 'main'
+  document.querySelector('main').classList.add('modal-open');
   focusTrap = trapFocusIn(contactModal);
 }
 
@@ -22,6 +24,8 @@ function closeModal() {
   contactModal.style.display = 'none';
   contactButton.style.display = 'block'
   contactModal.removeEventListener('keydown', focusTrap);
+  // Retrait de la classe 'modal-open' de l'élément 'main'
+  document.querySelector('main').classList.remove('modal-open');
   focusTrap = null;
 }
 

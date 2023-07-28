@@ -87,6 +87,7 @@
     justify-content: space-between;
     padding: 20px 35px 35px 35px;
     margin: auto;
+    overflow-y: scroll;
 
     position: fixed;
     top: 50%;
@@ -94,6 +95,11 @@
     transform: translate(-50%, -50%);
     z-index: 9999;
 }
+
+.modal-open {
+    opacity: 0.5;
+    position: fixed;
+  }
 
 .modal header {
     display: flex;
@@ -434,6 +440,10 @@ form textarea {
 @media (max-width: 1024px) {
     .photograph-header h2 {
         font-size: 2.5em;
+    }
+
+    .modal {
+        height: 80%; 
     }
 
     .modal_buttons {

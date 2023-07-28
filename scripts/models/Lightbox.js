@@ -6,13 +6,13 @@ class Lightbox {
         this.lightboxElement = lightboxElement;
 
         // Tableau de tous les éléments de la galerie
-        this.galleryElements = galleryElements; 
+        this.galleryElements = galleryElements;
 
         // Média actuellement affiché dans la lightbox
-        this.mediaPhotographer = mediaPhotographer; 
+        this.mediaPhotographer = mediaPhotographer;
 
         // Index de l'élément actuellement affiché dans la lightbox
-        this.currentElement = index; 
+        this.currentElement = index;
     }
 
     // Méthode pour afficher la lightbox
@@ -35,13 +35,13 @@ class Lightbox {
             e.stopPropagation();
             if (e.key === 'ArrowRight') {
                 // Appelle la méthode pour afficher le média suivant avec la flèche droite
-                this.goToNext(); 
+                this.goToNext();
             } else if (e.key === 'ArrowLeft') {
                 // Appelle la méthode pour afficher le média précédent avec la flèche gauche
-                this.goToPrev(); 
+                this.goToPrev();
             } else if (e.key === 'Escape') {
                 // Appelle la méthode pour fermer la lightbox en appuyant sur la touche 'Echap'
-                this.close(); 
+                this.close();
             }
         });
 
@@ -61,6 +61,15 @@ class Lightbox {
         lightboxLink.addEventListener('click', function (event) {
             event.preventDefault();
         });
+
+        // Si le média actuel est une vidéo, ajoute l'attribut 'controls' pour afficher les contrôles de lecture vidéo
+        if (this.mediaPhotographer instanceof Video) {
+            const lightboxMedia = this.lightboxElement.querySelector('.lightboxContent a');
+            const videoElement = lightboxMedia.querySelector('video');
+            if (videoElement) {
+                videoElement.setAttribute('controls', '');
+            }
+        }
     }
 
     // Méthode pour afficher le média suivant dans la lightbox
@@ -69,13 +78,13 @@ class Lightbox {
 
         if (this.currentElement >= this.galleryElements.length) {
             // Reviens au premier élément si on dépasse la fin du tableau
-            this.currentElement = 0; 
+            this.currentElement = 0;
         }
-        
+
         // Met à jour le média affiché dans la lightbox
-        this.mediaPhotographer = this.galleryElements[this.currentElement]; 
+        this.mediaPhotographer = this.galleryElements[this.currentElement];
         // Met à jour le contenu de la lightbox avec le média suivant
-        this.updateContent(); 
+        this.updateContent();
     }
 
     // Méthode pour afficher le média précédent dans la lightbox
@@ -84,25 +93,25 @@ class Lightbox {
 
         if (this.currentElement < 0) {
             // Reviens au dernier élément si on dépasse le début du tableau
-            this.currentElement = this.galleryElements.length - 1; 
+            this.currentElement = this.galleryElements.length - 1;
         }
 
         // Met à jour le média affiché dans la lightbox 
-        this.mediaPhotographer = this.galleryElements[this.currentElement]; 
+        this.mediaPhotographer = this.galleryElements[this.currentElement];
         // Met à jour le contenu de la lightbox avec le média précédent
-        this.updateContent(); 
+        this.updateContent();
     }
 
     // Méthode pour fermer la lightbox
     close() {
         // Supprime la lightbox du DOM
-        this.lightboxElement.remove(); 
+        this.lightboxElement.remove();
 
         // Retire la classe 'lightbox-active' du <body>
-        document.body.classList.remove('lightbox-active'); 
+        document.body.classList.remove('lightbox-active');
 
         // Supprime l'écouteur d'événement pour la navigation au clavier
-        this.lightboxElement.removeEventListener('keydown', this.trapFocusIn); 
+        this.lightboxElement.removeEventListener('keydown', this.trapFocusIn);
     }
 
     // Méthode pour mettre à jour le contenu de la lightbox avec le média actuellement affiché
@@ -112,9 +121,9 @@ class Lightbox {
         const lightboxTitle = lightboxContent.querySelector('.lightboxTitle');
 
         // Met à jour le contenu de la lightbox avec le média actuel
-        lightboxMedia.innerHTML = this.mediaPhotographer.getTypeOfMedia(); 
+        lightboxMedia.innerHTML = this.mediaPhotographer.getTypeOfMedia();
         // Met à jour le titre de la lightbox avec le titre du média
-        lightboxTitle.textContent = this.mediaPhotographer.title; 
+        lightboxTitle.textContent = this.mediaPhotographer.title;
 
         // Si le média actuel est une vidéo, ajoute l'attribut 'controls' pour afficher les contrôles de lecture vidéo
         if (this.mediaPhotographer instanceof Video) {

@@ -15,13 +15,13 @@ class Video extends Media {
 
     // Méthode pour obtenir le chemin d'accès à la vidéo
     getPath() {
-        // Retourne le chemin d'accès à la vidéo en utilisant le nom du fichier "_video" et l'ID du photographe "_photographerId"
+        // Méthode pour obtenir le chemin de la vidéo
         return `assets/images/${this._photographerId}/${this._video}`;
     }
 
     // Méthode pour obtenir le balisage HTML de la vidéo
     getTypeOfMedia() {
-        // Retourne le balisage HTML d'une balise <video> avec l'attribut "src" pointant vers le chemin d'accès de la vidéo
+        // Méthode pour obtenir le code HTML de la vidéo
         return `<video src="${this.getPath()}" aria-label="${this._title}" poster=""></video>`;
     }
 }
