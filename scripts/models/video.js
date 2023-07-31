@@ -20,7 +20,6 @@ class Video extends Media {
 
     // Méthode pour obtenir le balisage HTML de la vidéo
     getTypeOfMedia() {
-        // Méthode pour obtenir le code HTML de la vidéo
         return `<video src="${this.getPath()}" aria-label="${this._title}" poster=""></video>`;
     }
 }
