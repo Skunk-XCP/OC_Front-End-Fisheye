@@ -15,7 +15,6 @@ class Video extends Media {
 
     // Méthode pour obtenir le chemin d'accès à la vidéo
     getPath() {
-        // Méthode pour obtenir le chemin de la vidéo
         return `assets/images/${this._photographerId}/${this._video}`;
     }
 
