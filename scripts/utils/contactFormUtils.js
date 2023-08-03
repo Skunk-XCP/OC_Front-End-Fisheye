@@ -27,6 +27,9 @@ function closeModal() {
   document.body.classList.remove('modal-open-scroll');
   document.querySelector('main').classList.remove('modal-open-background');
   focusTrap = null;
+  // Déplacez le focus vers le bouton contactButton après avoir fermé la modale
+  contactButton.focus();
+
 }
 
 // On ajoute un écouteur d'événement à un élément du HTML
@@ -45,13 +48,11 @@ main.addEventListener('click', (e) => {
 closeBtn.addEventListener('click', closeModal);
 
 
+
 // Associe la fonction closeModal à l'appui de la touche 'Escape' dans la modal
 contactModal.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
         closeModal();
-
-        // Déplacez le focus vers le bouton contactButton après avoir fermé la modale
-        contactButton.focus();
     }
 });
 
